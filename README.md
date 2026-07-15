@@ -22,7 +22,7 @@ Esto genera la carpeta `out/` con HTML/CSS/JS listos para cualquier hosting est�
 
 ## Desplegar en GitHub Pages
 
-1. Crea un repositorio en GitHub llamado **`jdiegoisazaHV`**. Como no es un repo `usuario.github.io`, el sitio se sirve bajo `https://jdiegoisaza.github.io/jdiegoisazaHV/` — `next.config.mjs` ya tiene el `basePath`/`assetPrefix` configurados para eso. Si en algún momento cambias el nombre del repo, actualiza la constante `basePath` en `next.config.mjs`.
+1. Repositorio en GitHub: **`jdiegoisazaCV`**. Como no es un repo `usuario.github.io`, el sitio se sirve bajo `https://jdiegoisaza.github.io/jdiegoisazaCV/` — `next.config.mjs` ya tiene el `basePath`/`assetPrefix` configurados para eso. Si en algún momento cambias el nombre del repo, actualiza la constante `basePath` en `next.config.mjs`.
 2. Sube este contenido de `pagina-web/` a ese repositorio (rama `main`).
 3. En GitHub → Settings → Pages, en "Build and deployment" selecciona **GitHub Actions** como source.
 4. El workflow en `.github/workflows/deploy.yml` ya está listo: cada push a `main` compila y publica automáticamente. También puedes dispararlo manualmente desde la pestaña Actions.

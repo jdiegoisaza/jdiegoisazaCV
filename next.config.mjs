@@ -1,5 +1,5 @@
-// Repo de proyecto (no jdiegoisaza.github.io), se sirve bajo /jdiegoisazaHV/
-const basePath = "/jdiegoisazaHV";
+// Repo de proyecto (no jdiegoisaza.github.io), se sirve bajo /jdiegoisazaCV/
+const basePath = "/jdiegoisazaCV";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
