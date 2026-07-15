@@ -1,6 +1,18 @@
+// Repo de proyecto (no jdiegoisaza.github.io), se sirve bajo /jdiegoisazaHV/
+const basePath = "/jdiegoisazaHV";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
+  basePath,
+  assetPrefix: `${basePath}/`,
+  env: {
+    // Para construir hrefs a assets públicos (ej. el PDF del CV) desde componentes cliente/servidor.
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 };
 
 export default nextConfig;

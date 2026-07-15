@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sitio personal — Juan Diego Isaza
 
-## Getting Started
+Sitio de una sola página (Next.js 16 + App Router + Tailwind v4) generado a partir del contenido de `../resume.tex`. El contenido vive centralizado en `app/data/cv.js` para que sea fácil mantenerlo sincronizado con el CV.
 
-First, run the development server:
+## Desarrollo local
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Build estático
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+El sitio está configurado como **export estático** (`output: "export"` en `next.config.mjs`), pensado para GitHub Pages:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Esto genera la carpeta `out/` con HTML/CSS/JS listos para cualquier hosting estático.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Desplegar en GitHub Pages
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Crea un repositorio en GitHub llamado **`jdiegoisazaHV`**. Como no es un repo `usuario.github.io`, el sitio se sirve bajo `https://jdiegoisaza.github.io/jdiegoisazaHV/` — `next.config.mjs` ya tiene el `basePath`/`assetPrefix` configurados para eso. Si en algún momento cambias el nombre del repo, actualiza la constante `basePath` en `next.config.mjs`.
+2. Sube este contenido de `pagina-web/` a ese repositorio (rama `main`).
+3. En GitHub → Settings → Pages, en "Build and deployment" selecciona **GitHub Actions** como source.
+4. El workflow en `.github/workflows/deploy.yml` ya está listo: cada push a `main` compila y publica automáticamente. También puedes dispararlo manualmente desde la pestaña Actions.
 
-## Deploy on Vercel
+## Pendientes antes de publicar
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Coloca tu CV compilado en `public/CV_JuanIsaza.pdf` (el botón "Descargar CV" del Hero ya apunta ahí).
+- Completa la sección "Proyectos personales" en `app/data/cv.js` (`proyectos`) cuando tengas repos propios que mostrar — hoy aparece como "Próximamente" a propósito, para no inventar contenido.
+- Revisa `app/data/cv.js` cada vez que cambie `resume.tex`, para que el sitio y el CV no se desalineen.
