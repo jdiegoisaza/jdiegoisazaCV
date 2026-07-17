@@ -1,0 +1,52 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: "ubuntu-latest"
+
+variables:
+  - group: swa-secrets
+  - name: NODE_VERSION
+    value: "22.x"
+
+stages:
+  - stage: Build
+    displayName: "Build"
+    jobs:
+      - job: Build
+        displayName: "Compilar sitio Next.js (export estático)"
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: $(NODE_VERSION)
+            displayName: "Instalar Node.js"
+
+          - script: |
+              npm ci
+              npm run build
+            displayName: "npm ci && npm run build"
+
+          - publish: out
+            artifact: site
+            displayName: "Publicar artefacto (out/)"
+
+  - stage: Deploy
+    displayName: "Deploy"
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - deployment: DeployStaticWebApp
+        displayName: "Desplegar a Azure Static Web Apps"
+        environment: "production"
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureStaticWebApp@0
+                  displayName: "Publicar en Azure Static Web Apps"
+                  inputs:
+                    app_location: "$(Pipeline.Workspace)/site"
+                    skip_app_build: true
+                    azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN)
