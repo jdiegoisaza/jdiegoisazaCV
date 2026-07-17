@@ -128,6 +128,12 @@ export const proyectos = [
     resumen:
       "Diseño y desarrollo de un sistema de extensiones de Azure DevOps inyectadas automáticamente vía pipeline decorators, estandarizando controles DevSecOps en más de 60 pipelines sin configuración manual por equipo.",
     stack: ["Azure DevOps", "YAML", "PowerShell", "Python", "Azure DevOps REST API"],
+    repos: [
+      {
+        label: "Ver ejemplo público del patrón",
+        url: "https://github.com/jdiegoisaza/Decorator_DevOps",
+      },
+    ],
   },
   {
     titulo: "Homologación DevSecOps Bancolombia → Banco Agrícola",
@@ -142,5 +148,16 @@ export const proyectos = [
     resumen:
       "Migré este portafolio a un pipeline propio en Azure DevOps (agente self-hosted) con un stage de seguridad real —Gitleaks, npm audit, Trivy, SBOM y Checkov— antes de compilar y desplegar a Azure Static Web Apps. Infraestructura versionada en Terraform, importada desde los recursos existentes sin downtime.",
     stack: ["Azure Static Web Apps", "Azure DevOps Pipelines", "Terraform", "Gitleaks", "Trivy", "Checkov", "SonarCloud"],
+  },
+  {
+    titulo: "Extensiones y pipeline decorators para Azure DevOps",
+    subtitulo: "Proyecto propio, open source — el mismo patrón usado en Devco",
+    resumen:
+      "Implementación pública y genérica del patrón de pipeline decorators: una extensión con 9 decorators (Gitleaks, Checkov, Trivy, Hadolint, auditoría de builds y releases, detección de rollback) que se inyectan automáticamente en cualquier pipeline de la organización, sin configuración manual por equipo. Incluye además la plantilla reutilizable para construir nuevas tareas personalizadas en TypeScript y Python.",
+    stack: ["Azure DevOps", "TypeScript", "Python", "Gitleaks", "Checkov", "Trivy", "Hadolint"],
+    repos: [
+      { label: "Decorator_DevOps", url: "https://github.com/jdiegoisaza/Decorator_DevOps" },
+      { label: "ExtensionsTemplate_DevOps", url: "https://github.com/jdiegoisaza/ExtensionsTemplate_DevOps" },
+    ],
   },
 ];

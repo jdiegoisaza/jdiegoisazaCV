@@ -17,7 +17,7 @@ export default function Portfolio() {
             <h3 className="font-semibold text-neutral-900 mb-1">{proyecto.titulo}</h3>
             <p className="text-sm text-blue-600 mb-3">{proyecto.subtitulo}</p>
             <p className="text-sm text-neutral-600 leading-relaxed mb-4">{proyecto.resumen}</p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mb-4">
               {proyecto.stack.map((tech) => (
                 <span
                   key={tech}
@@ -27,13 +27,23 @@ export default function Portfolio() {
                 </span>
               ))}
             </div>
+            {proyecto.repos && (
+              <div className="flex flex-wrap gap-x-4 gap-y-1">
+                {proyecto.repos.map((repo) => (
+                  <a
+                    key={repo.url}
+                    href={repo.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm text-blue-600 hover:underline"
+                  >
+                    {repo.label} →
+                  </a>
+                ))}
+              </div>
+            )}
           </article>
         ))}
-
-        <article className="rounded-lg border border-dashed border-neutral-300 p-6 flex flex-col justify-center items-start text-neutral-400">
-          <h3 className="font-semibold mb-1">Proyectos personales</h3>
-          <p className="text-sm">Próximamente — en construcción.</p>
-        </article>
       </div>
     </section>
   );
