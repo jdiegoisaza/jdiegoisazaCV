@@ -136,4 +136,11 @@ export const proyectos = [
       "Homologación de herramientas DevSecOps entre dos entidades del mismo grupo bancario, incluyendo contribución directa al proyecto open source Engine Tools de Bancolombia.",
     stack: ["Azure DevOps", "Engine Tools", "SonarQube", "JFrog Xray", "Trivy"],
   },
+  {
+    titulo: "De GitHub Pages a un pipeline DevSecOps propio en Azure",
+    subtitulo: "Este mismo sitio: Azure Static Web Apps + Azure DevOps + Terraform",
+    resumen:
+      "Migré este portafolio a un pipeline propio en Azure DevOps (agente self-hosted) con un stage de seguridad real —Gitleaks, npm audit, Trivy, SBOM y Checkov— antes de compilar y desplegar a Azure Static Web Apps. Infraestructura versionada en Terraform, importada desde los recursos existentes sin downtime.",
+    stack: ["Azure Static Web Apps", "Azure DevOps Pipelines", "Terraform", "Gitleaks", "Trivy", "Checkov", "SonarCloud"],
+  },
 ];
