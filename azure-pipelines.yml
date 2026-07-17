@@ -51,9 +51,10 @@ stages:
             displayName: "Publicar SBOM"
 
           - script: |
-              python3 -m pip install --user --quiet checkov
-              export PATH="$HOME/.local/bin:$PATH"
-              checkov -d infra --framework terraform --compact --soft-fail
+              python3 -m venv "$(Agent.TempDirectory)/checkov-venv"
+              "$(Agent.TempDirectory)/checkov-venv/bin/pip" install --quiet --upgrade pip
+              "$(Agent.TempDirectory)/checkov-venv/bin/pip" install --quiet checkov
+              "$(Agent.TempDirectory)/checkov-venv/bin/checkov" -d infra --framework terraform --compact --soft-fail
             displayName: "Checkov - escaneo de IaC (Terraform)"
 
   - stage: Build
