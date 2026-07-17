@@ -10,10 +10,50 @@ variables:
   - group: swa-secrets
   - name: NODE_VERSION
     value: "22.x"
+  - name: GITLEAKS_VERSION
+    value: "8.30.1"
 
 stages:
+  - stage: Security
+    displayName: "Security"
+    jobs:
+      - job: Security
+        displayName: "SAST/SCA/Secrets/SBOM"
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: $(NODE_VERSION)
+            displayName: "Instalar Node.js"
+
+          - script: npm ci
+            displayName: "npm ci"
+
+          - script: |
+              curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v$(GITLEAKS_VERSION)/gitleaks_$(GITLEAKS_VERSION)_linux_x64.tar.gz" -o gitleaks.tar.gz
+              tar -xzf gitleaks.tar.gz gitleaks
+              ./gitleaks detect --source . --redact --exit-code 1
+            displayName: "Gitleaks - detección de secretos"
+
+          - script: npm audit --audit-level=high
+            displayName: "npm audit - vulnerabilidades en dependencias (SCA)"
+
+          - script: |
+              curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b ./bin
+              ./bin/trivy fs --scanners vuln --exit-code 1 --severity HIGH,CRITICAL --ignore-unfixed .
+            displayName: "Trivy - escaneo de dependencias (SCA)"
+
+          - script: |
+              npx -y @cyclonedx/cyclonedx-npm --output-file $(Build.ArtifactStagingDirectory)/sbom.json
+            displayName: "Generar SBOM (CycloneDX)"
+
+          - publish: $(Build.ArtifactStagingDirectory)/sbom.json
+            artifact: sbom
+            displayName: "Publicar SBOM"
+
   - stage: Build
     displayName: "Build"
+    dependsOn: Security
+    condition: succeeded()
     jobs:
       - job: Build
         displayName: "Compilar sitio Next.js (export estático)"
