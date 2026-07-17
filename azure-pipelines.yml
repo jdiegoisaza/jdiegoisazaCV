@@ -44,6 +44,10 @@ stages:
           runOnce:
             deploy:
               steps:
+                - download: current
+                  artifact: site
+                  displayName: "Descargar artefacto 'site'"
+
                 - task: AzureStaticWebApp@0
                   displayName: "Publicar en Azure Static Web Apps"
                   inputs:
