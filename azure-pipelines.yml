@@ -12,6 +12,8 @@ variables:
     value: "22.x"
   - name: GITLEAKS_VERSION
     value: "8.30.1"
+  - name: SONAR_SCANNER_VERSION
+    value: "8.0.1.6346"
 
 stages:
   - stage: Security
@@ -56,6 +58,12 @@ stages:
               "$(Agent.TempDirectory)/checkov-venv/bin/pip" install --quiet checkov
               "$(Agent.TempDirectory)/checkov-venv/bin/checkov" -d infra --framework terraform --compact --soft-fail
             displayName: "Checkov - escaneo de IaC (Terraform)"
+
+          - script: |
+              curl -sSfL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$(SONAR_SCANNER_VERSION)-linux-x64.zip" -o sonar-scanner.zip
+              unzip -q -o sonar-scanner.zip
+              ./sonar-scanner-$(SONAR_SCANNER_VERSION)-linux-x64/bin/sonar-scanner -Dsonar.token=$(SONAR_TOKEN)
+            displayName: "SonarCloud - análisis SAST"
 
   - stage: Build
     displayName: "Build"
