@@ -50,6 +50,12 @@ stages:
             artifact: sbom
             displayName: "Publicar SBOM"
 
+          - script: |
+              python3 -m pip install --user --quiet checkov
+              export PATH="$HOME/.local/bin:$PATH"
+              checkov -d infra --framework terraform --compact --soft-fail
+            displayName: "Checkov - escaneo de IaC (Terraform)"
+
   - stage: Build
     displayName: "Build"
     dependsOn: Security
