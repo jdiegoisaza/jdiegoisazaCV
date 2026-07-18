@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# CV: PDF se genera en el pipeline (Docker + TeX Live), no se comitea
+/public/CV_JuanIsaza.pdf
+cv/*.aux
+cv/*.log
+cv/*.out
+cv/resume.pdf

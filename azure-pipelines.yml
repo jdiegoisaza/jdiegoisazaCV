@@ -73,6 +73,21 @@ stages:
       - job: Build
         displayName: "Compilar sitio Next.js (export estático)"
         steps:
+          - script: |
+              docker run --rm -v "$(System.DefaultWorkingDirectory)/cv:/data" -w /data texlive/texlive:latest bash -c "
+                mkdir -p ~/.fonts &&
+                cp fonts/*.ttf ~/.fonts/ &&
+                fc-cache -f &&
+                xelatex -interaction=nonstopmode -halt-on-error resume.tex &&
+                xelatex -interaction=nonstopmode -halt-on-error resume.tex
+              "
+            displayName: "Compilar CV (Docker + TeX Live)"
+
+          - script: |
+              mkdir -p public
+              cp cv/resume.pdf public/CV_JuanIsaza.pdf
+            displayName: "Copiar CV compilado a public/"
+
           - task: NodeTool@0
             inputs:
               versionSpec: $(NODE_VERSION)

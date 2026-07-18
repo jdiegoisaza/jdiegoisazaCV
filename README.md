@@ -1,6 +1,6 @@
 # Sitio personal — Juan Diego Isaza
 
-Sitio de una sola página (Next.js 16 + App Router + Tailwind v4) generado a partir del contenido de `../resume.tex`. El contenido vive centralizado en `app/data/cv.js` para que sea fácil mantenerlo sincronizado con el CV.
+Sitio de una sola página (Next.js 16 + App Router + Tailwind v4). El contenido vive centralizado en `app/data/cv.js`, y el CV en PDF se compila desde LaTeX en `cv/resume.tex`.
 
 ## Desarrollo local
 
@@ -8,11 +8,11 @@ Sitio de una sola página (Next.js 16 + App Router + Tailwind v4) generado a par
 npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000).
+Abre [http://localhost:3000](http://localhost:3000). El botón "Descargar CV" apunta a `public/CV_JuanIsaza.pdf` — en local no se regenera solo, ver la sección de CV más abajo.
 
 ## Build estático
 
-El sitio está configurado como **export estático** (`output: "export"` en `next.config.mjs`), pensado para GitHub Pages:
+El sitio está configurado como **export estático** (`output: "export"` en `next.config.mjs`):
 
 ```bash
 npm run build
@@ -20,15 +20,31 @@ npm run build
 
 Esto genera la carpeta `out/` con HTML/CSS/JS listos para cualquier hosting estático.
 
-## Desplegar en GitHub Pages
+## CV en PDF (`cv/`)
 
-1. Repositorio en GitHub: **`jdiegoisazaCV`**. Como no es un repo `usuario.github.io`, el sitio se sirve bajo `https://jdiegoisaza.github.io/jdiegoisazaCV/` — `next.config.mjs` ya tiene el `basePath`/`assetPrefix` configurados para eso. Si en algún momento cambias el nombre del repo, actualiza la constante `basePath` en `next.config.mjs`.
-2. Sube este contenido de `pagina-web/` a ese repositorio (rama `main`).
-3. En GitHub → Settings → Pages, en "Build and deployment" selecciona **GitHub Actions** como source.
-4. El workflow en `.github/workflows/deploy.yml` ya está listo: cada push a `main` compila y publica automáticamente. También puedes dispararlo manualmente desde la pestaña Actions.
+`cv/resume.tex` (clase `awesome-cv.cls` + fuentes en `cv/fonts/`) es la fuente de verdad del CV. El PDF **no se comitea** — se compila en cada corrida del pipeline con Docker + TeX Live y se copia a `public/CV_JuanIsaza.pdf` antes del build de Next.js.
 
-## Pendientes antes de publicar
+Para compilarlo localmente (requiere Docker):
 
-- Coloca tu CV compilado en `public/CV_JuanIsaza.pdf` (el botón "Descargar CV" del Hero ya apunta ahí).
-- Completa la sección "Proyectos personales" en `app/data/cv.js` (`proyectos`) cuando tengas repos propios que mostrar — hoy aparece como "Próximamente" a propósito, para no inventar contenido.
-- Revisa `app/data/cv.js` cada vez que cambie `resume.tex`, para que el sitio y el CV no se desalineen.
+```bash
+cd cv
+docker run --rm -v "$(pwd):/data" -w /data texlive/texlive:latest bash -c "
+  mkdir -p ~/.fonts && cp fonts/*.ttf ~/.fonts/ && fc-cache -f &&
+  xelatex -interaction=nonstopmode resume.tex &&
+  xelatex -interaction=nonstopmode resume.tex
+"
+cp resume.pdf ../public/CV_JuanIsaza.pdf
+```
+
+Revisa `app/data/cv.js` cada vez que cambie `cv/resume.tex`, para que el sitio y el CV no se desalineen (son dos fuentes de contenido independientes).
+
+## Infraestructura y despliegue
+
+- **Hosting**: Azure Static Web Apps (`infra/` tiene la definición en Terraform).
+- **CI/CD**: Azure DevOps Pipelines (`azure-pipelines.yml`), corriendo en un agente self-hosted, con tres stages:
+  1. **Security** — Gitleaks, npm audit, Trivy, SBOM (CycloneDX), Checkov, SonarCloud.
+  2. **Build** — compila el CV (Docker + TeX Live), compila el sitio (`npm run build`).
+  3. **Deploy** — publica a Azure Static Web Apps vía SWA CLI.
+- Cada push a `main` dispara el pipeline automáticamente.
+
+Ver `portafolio/03-infraestructura-devsecops-portafolio.md` (en el repo `HV/` local) para el detalle completo de cómo se armó esto.
