@@ -101,24 +101,29 @@ export const educacion = [
 export const habilidades = [
   {
     categoria: "DevOps & CI/CD",
-    items: "Azure DevOps (Pipelines, Repos, Boards, Artifacts, Environments), Azure CLI, GitHub Actions, Git",
+    items: [
+      "Azure DevOps (Pipelines, Repos, Boards, Artifacts, Environments)",
+      "Azure CLI",
+      "GitHub Actions",
+      "Git",
+    ],
   },
-  { categoria: "Cloud", items: "Azure (avanzado), AKS (soporte), GCP (básico), AWS (básico)" },
-  { categoria: "Contenedores", items: "Docker (intermedio), Kubernetes (en desarrollo)" },
-  { categoria: "IaC", items: "Terraform, YAML Pipelines" },
+  { categoria: "Cloud", items: ["Azure (avanzado)", "AKS (soporte)", "GCP (básico)", "AWS (básico)"] },
+  { categoria: "Contenedores", items: ["Docker (intermedio)", "Kubernetes (en desarrollo)"] },
+  { categoria: "IaC", items: ["Terraform", "YAML Pipelines"] },
   {
     categoria: "DevSecOps (SAST/SCA)",
-    items: "SonarQube, JFrog Xray, Trivy, Checkov (IaC Scanning), OWASP Top 10",
+    items: ["SonarQube", "JFrog Xray", "Trivy", "Checkov (IaC Scanning)", "OWASP Top 10"],
   },
   {
     categoria: "Secretos & Artefactos",
-    items: "Gitleaks, TruffleHog (Secrets Detection), Artifactory, SBOM",
+    items: ["Gitleaks", "TruffleHog (Secrets Detection)", "Artifactory", "SBOM"],
   },
-  { categoria: "Scripting", items: "Python, PowerShell, Bash" },
-  { categoria: "Observabilidad", items: "Prometheus, Grafana" },
-  { categoria: "Desarrollo", items: "Java, Spring Boot, Python, TypeScript, Angular, React" },
-  { categoria: "Bases de Datos", items: "SQL y NoSQL" },
-  { categoria: "Agile", items: "Scrum, Kanban" },
+  { categoria: "Scripting", items: ["Python", "PowerShell", "Bash"] },
+  { categoria: "Observabilidad", items: ["Prometheus", "Grafana"] },
+  { categoria: "Desarrollo", items: ["Java", "Spring Boot", "Python", "TypeScript", "Angular", "React"] },
+  { categoria: "Bases de Datos", items: ["SQL", "NoSQL"] },
+  { categoria: "Agile", items: ["Scrum", "Kanban"] },
 ];
 
 export const certificaciones = [

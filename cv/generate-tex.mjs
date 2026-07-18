@@ -85,7 +85,7 @@ function buildEducacion() {
 
 function buildHabilidades() {
   const entries = habilidades.map(
-    (h) => `  \\cvskill{${escapeLatex(h.categoria)}}{${escapeLatex(h.items)}}`
+    (h) => `  \\cvskill{${escapeLatex(h.categoria)}}{${escapeLatex(h.items.join(", "))}}`
   );
 
   return [
