@@ -1,4 +1,4 @@
-import { perfil } from "@/app/data/cv";
+import { perfil } from "@/app/data/cv.mjs";
 
 export default function Contact() {
   return (

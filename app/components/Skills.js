@@ -1,4 +1,4 @@
-import { habilidades, certificaciones, educacion } from "@/app/data/cv";
+import { habilidades, certificaciones, educacion } from "@/app/data/cv.mjs";
 
 export default function Skills() {
   return (

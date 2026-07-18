@@ -1,4 +1,4 @@
-import { proyectos } from "@/app/data/cv";
+import { proyectos } from "@/app/data/cv.mjs";
 
 export default function Portfolio() {
   return (

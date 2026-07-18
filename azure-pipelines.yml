@@ -73,6 +73,14 @@ stages:
       - job: Build
         displayName: "Compilar sitio Next.js (export estático)"
         steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: $(NODE_VERSION)
+            displayName: "Instalar Node.js"
+
+          - script: node cv/generate-tex.mjs
+            displayName: "Generar cv/resume.tex desde app/data/cv.mjs"
+
           - script: |
               docker run --rm -v "$(System.DefaultWorkingDirectory)/cv:/data" -w /data texlive/texlive:latest bash -c "
                 mkdir -p ~/.fonts &&
@@ -87,11 +95,6 @@ stages:
               mkdir -p public
               cp cv/resume.pdf public/CV_JuanIsaza.pdf
             displayName: "Copiar CV compilado a public/"
-
-          - task: NodeTool@0
-            inputs:
-              versionSpec: $(NODE_VERSION)
-            displayName: "Instalar Node.js"
 
           - script: |
               npm ci

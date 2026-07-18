@@ -1,0 +1,45 @@
+%===========================
+% CV en Awesome-CV
+% Plantilla: el contenido real se inyecta con generate-tex.mjs a partir de ../app/data/cv.mjs
+% NO editar contenido aquí — editar cv.mjs y regenerar.
+%===========================
+\documentclass[11pt, a4paper]{awesome-cv}
+
+% Configuración de márgenes
+\geometry{left=1.5cm, top=1.5cm, right=1.5cm, bottom=1.5cm, footskip=.5cm}
+
+% Colores y fuente
+\definecolor{awesome-blue}{RGB}{0,102,204}
+\colorlet{awesome}{awesome-blue}
+\setbool{acvSectionColorHighlight}{true}
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+
+% Fix ATS: \headerpositionstyle y \entrypositionstyle usan \scshape, cuya fuente
+% mapea mal la "i" minúscula al extraer texto del PDF (ej. "Especialista" -> "ESPECiALiSTA").
+% Se reemplaza por mayúsculas reales (\MakeUppercase) para que el texto copiado/parseado por un ATS sea correcto.
+\renewcommand*{\headerpositionstyle}[1]{{\fontsize{7.6pt}{1em}\bodyfont\bfseries\color{awesome} #1}}
+\renewcommand*{\entrypositionstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\bfseries\color{graytext} \MakeUppercase{#1}}}
+
+% Fix ATS: cvitems (bullets de experiencia) usa \begin{justify}, que en líneas densas
+% comprime los espacios entre palabras hasta el punto de que la extracción de texto los pierde
+% (ej. "desarrollé múltiples" -> "desarrollémúltiples"). Se cambia a \RaggedRight para evitar la compresión.
+\renewenvironment{cvitems}{%
+  \vspace{-4.0mm}
+  \RaggedRight
+  \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+    \setlength{\parskip}{0pt}
+    \renewcommand{\labelitemi}{\bullet}
+}{%
+  \end{itemize}
+  \vspace{1.0mm}
+}
+
+%%HEADER%%
+
+\begin{document}
+%----------- ENCABEZADO -----------
+\makecvheader
+
+%%BODY%%
+
+\end{document}

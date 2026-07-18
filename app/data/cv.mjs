@@ -1,14 +1,21 @@
-// Fuente de verdad del contenido del sitio. Debe mantenerse alineado con ../../resume.tex
+// Fuente de verdad del contenido del sitio Y del CV en PDF (ver ../../cv/generate-tex.mjs).
+// mobile/nombrePila/apellidos/perfilCV existen solo para el PDF — ningún componente del sitio los usa.
 
 export const perfil = {
   nombre: "Juan Diego Isaza Londoño",
+  nombrePila: "Juan Diego",
+  apellidos: "Isaza Londoño",
   titulo: "Especialista DevSecOps · Ingeniero de Sistemas",
   ubicacion: "Medellín, Colombia",
+  mobile: "+57 301 2951921",
   email: "juan.diego-13@hotmail.com",
   github: "https://github.com/jdiegoisaza",
   linkedin: "https://linkedin.com/in/jdiegoisaza",
   resumen:
     "Especialista DevSecOps con foco en Azure DevOps, automatización de pipelines CI/CD y estandarización de controles de seguridad a escala organizacional. Diseñé un sistema propio de extensiones y pipeline decorators que inyecta automáticamente controles DevSecOps en más de 60 pipelines y repositorios, y estuve encargado de la homologación de las herramientas DevSecOps de Bancolombia hacia Banco Agrícola (Grupo Cibest, El Salvador), incluyendo contribución directa al proyecto open source Engine Tools.",
+  // Versión más completa usada en el PDF (el hero del sitio usa la versión corta de arriba).
+  perfilCV:
+    "Especialista DevSecOps con foco en Azure DevOps, automatización de pipelines CI/CD y estandarización de controles de seguridad a escala organizacional. Diseñé un sistema propio de extensiones y pipeline decorators que inyecta automáticamente controles DevSecOps en más de 60 pipelines y repositorios, y estuve encargado de la homologación de las herramientas DevSecOps de Bancolombia hacia Banco Agrícola (Grupo Cibest, El Salvador), incluyendo contribución directa al proyecto open source Engine Tools. Ingeniero de Sistemas (Universidad de Antioquia), con bases en desarrollo web (Java, Angular). Experiencia integrando controles SAST, SCA, detección de secretos y escaneo de IaC (SonarQube, JFrog Xray, Trivy, Gitleaks, TruffleHog, Checkov). Certificado en Google Cloud (incluye fundamentos de Kubernetes). Orientado a seguridad desde el diseño (shift-left), automatización con Python, PowerShell y Bash, y colaboración ágil (Scrum).",
 };
 
 export const experiencia = [
@@ -77,12 +84,14 @@ export const educacion = [
   {
     titulo: "Ingeniería de Sistemas",
     institucion: "Universidad de Antioquia",
+    ubicacion: "Medellín, Colombia",
     periodo: "2015 -- 2023",
     detalle: "Egresado",
   },
   {
     titulo: "Bachiller Académico",
     institucion: "I.E. Campo Valdés",
+    ubicacion: "Medellín, Colombia",
     periodo: "2012",
   },
 ];

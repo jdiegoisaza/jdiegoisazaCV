@@ -1,4 +1,4 @@
-import { experiencia } from "@/app/data/cv";
+import { experiencia } from "@/app/data/cv.mjs";
 
 export default function Experience() {
   return (
