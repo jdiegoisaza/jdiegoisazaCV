@@ -9,6 +9,7 @@ import {
   educacion,
   habilidades,
   certificaciones,
+  proyectos,
 } from "../app/data/cv.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -39,6 +40,7 @@ function buildHeader() {
     `\\email{${escapeLatex(perfil.email)}}`,
     `\\github{${escapeLatex(handleFromUrl(perfil.github, "github.com"))}}`,
     `\\linkedin{${escapeLatex(handleFromUrl(perfil.linkedin, "linkedin.com"))}}`,
+    `\\extrainfo{\\faGlobe\\ \\href{${perfil.sitioWeb}}{jdiegoisaza}}`,
   ].join("\n");
 }
 
@@ -112,6 +114,31 @@ function buildCertificaciones() {
   ].join("\n");
 }
 
+function buildPortafolio() {
+  const entries = proyectos.map((p) => {
+    const stack = escapeLatex((p.stack || []).join(", "));
+    const links = (p.repos || [])
+      .map((r) => `\\href{${r.url}}{${escapeLatex(r.label)}}`)
+      .join(", ");
+
+    const descParts = [`\\textit{${escapeLatex(p.subtitulo)}.} ${escapeLatex(p.resumen)}`];
+    if (links) descParts.push(`\\textbf{Repositorio:} ${links}`);
+
+    return [
+      "\\cventry",
+      `  {${stack}} % Stack`,
+      `  {${escapeLatex(p.titulo)}} % Proyecto`,
+      "  {} % Localización",
+      "  {} % Fechas",
+      `  {${descParts.join(" ")}} % Descripción`,
+    ].join("\n");
+  });
+
+  return ["%----------- PORTAFOLIO -----------", "\\cvsection{Portafolio}", entries.join("\n\n")].join(
+    "\n"
+  );
+}
+
 function buildBody() {
   return [
     "%----------- PERFIL -----------",
@@ -126,6 +153,8 @@ function buildBody() {
     buildHabilidades(),
     "",
     buildCertificaciones(),
+    "",
+    buildPortafolio(),
   ].join("\n");
 }
 

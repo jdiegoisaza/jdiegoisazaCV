@@ -11,6 +11,8 @@ export const perfil = {
   email: "juan.diego-13@hotmail.com",
   github: "https://github.com/jdiegoisaza",
   linkedin: "https://linkedin.com/in/jdiegoisaza",
+  // Solo para el PDF (\extrainfo en el header, después de LinkedIn).
+  sitioWeb: "https://salmon-bush-02614530f.7.azurestaticapps.net/",
   resumen:
     "Especialista DevSecOps con foco en Azure DevOps, automatización de pipelines CI/CD y estandarización de controles de seguridad a escala organizacional. Diseñé un sistema propio de extensiones y pipeline decorators que inyecta automáticamente controles DevSecOps en más de 60 pipelines y repositorios, y estuve encargado de la homologación de las herramientas DevSecOps de Bancolombia hacia Banco Agrícola (Grupo Cibest, El Salvador), incluyendo contribución directa al proyecto open source Engine Tools.",
   // Versión más completa usada en el PDF (el hero del sitio usa la versión corta de arriba).
