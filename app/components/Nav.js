@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 const links = [
   { href: "#inicio", label: "Inicio" },
@@ -13,6 +14,7 @@ const links = [
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("inicio");
+  const [isDark, setIsDark] = useState(null);
 
   useEffect(() => {
     const sections = links
@@ -29,51 +31,71 @@ export default function Nav() {
     );
 
     sections.forEach((section) => observer.observe(section));
+    setIsDark(document.documentElement.classList.contains("dark"));
     return () => observer.disconnect();
   }, []);
 
+  function toggleTheme() {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    try {
+      localStorage.setItem("theme", next ? "dark" : "light");
+    } catch (e) {
+      // localStorage no disponible (modo privado, etc.) — no bloquea el toggle
+    }
+  }
+
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-200">
+    <header className="sticky top-0 z-50 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 transition-colors">
       <nav className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
-        <a href="#inicio" className="font-semibold text-neutral-900">
+        <a href="#inicio" className="font-semibold text-neutral-900 dark:text-neutral-100">
           Juan Diego Isaza
         </a>
 
-        <button
-          type="button"
-          className="sm:hidden text-neutral-700"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Abrir menú"
-        >
-          {open ? "✕" : "☰"}
-        </button>
+        <div className="flex items-center gap-2 sm:hidden">
+          <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+          <button
+            type="button"
+            className="text-neutral-700 dark:text-neutral-300"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Abrir menú"
+          >
+            {open ? "✕" : "☰"}
+          </button>
+        </div>
 
-        <ul className="hidden sm:flex gap-6 text-sm">
-          {links.map((link) => {
-            const isActive = active === link.href.slice(1);
-            return (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className={`relative pb-1 transition-colors ${
-                    isActive ? "text-blue-600 font-medium" : "text-neutral-600 hover:text-blue-600"
-                  }`}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute -bottom-[1px] left-0 h-[2px] bg-blue-600 transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0"
+        <div className="hidden sm:flex items-center gap-6">
+          <ul className="flex gap-6 text-sm">
+            {links.map((link) => {
+              const isActive = active === link.href.slice(1);
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className={`relative pb-1 transition-colors ${
+                      isActive
+                        ? "text-blue-600 dark:text-blue-400 font-medium"
+                        : "text-neutral-600 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400"
                     }`}
-                  />
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+                  >
+                    {link.label}
+                    <span
+                      className={`absolute -bottom-[1px] left-0 h-[2px] bg-blue-600 dark:bg-blue-400 transition-all duration-300 ${
+                        isActive ? "w-full" : "w-0"
+                      }`}
+                    />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+          <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+        </div>
       </nav>
 
       {open && (
-        <ul className="sm:hidden flex flex-col gap-1 px-6 pb-4 text-sm text-neutral-600">
+        <ul className="sm:hidden flex flex-col gap-1 px-6 pb-4 text-sm text-neutral-600 dark:text-neutral-400">
           {links.map((link) => (
             <li key={link.href}>
               <a
