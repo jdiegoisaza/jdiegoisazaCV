@@ -11,10 +11,27 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "Juan Diego Isaza Londoño — Especialista DevSecOps";
+const description =
+  "Portafolio con casos de estudio reales de automatización DevSecOps en Azure: pipelines, seguridad integrada y despliegue continuo, incluyendo cómo construí y aseguré este mismo sitio.";
+
 export const metadata = {
-  title: "Juan Diego Isaza Londoño — Especialista DevSecOps",
-  description:
-    "Especialista DevSecOps · Ingeniero de Sistemas. Azure DevOps, CI/CD, automatización y seguridad en pipelines.",
+  metadataBase: new URL("https://salmon-bush-02614530f.7.azurestaticapps.net"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: "/",
+    siteName: "Juan Diego Isaza — Portafolio",
+    locale: "es_CO",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 // Aplica el tema guardado ANTES del primer render para evitar el flash del tema incorrecto.
