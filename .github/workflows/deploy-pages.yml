@@ -1,0 +1,73 @@
+name: Deploy a GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_BASE_PATH: /jdiegoisazaCV
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: npm ci
+        run: npm ci
+
+      - name: Generar cv/resume.tex desde app/data/cv.mjs
+        run: node cv/generate-tex.mjs
+
+      - name: Compilar CV (Docker + TeX Live)
+        run: |
+          docker run --rm -v "${{ github.workspace }}/cv:/data" -w /data texlive/texlive:latest bash -c "
+            mkdir -p ~/.fonts &&
+            cp fonts/*.ttf ~/.fonts/ &&
+            fc-cache -f &&
+            xelatex -interaction=nonstopmode -halt-on-error resume.tex &&
+            xelatex -interaction=nonstopmode -halt-on-error resume.tex
+          "
+
+      - name: Copiar CV compilado a public/
+        run: |
+          mkdir -p public
+          cp cv/resume.pdf public/CV_JuanIsaza.pdf
+
+      - name: Build del sitio
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

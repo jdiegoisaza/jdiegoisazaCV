@@ -28,7 +28,7 @@ export default function Hero() {
             Contactar
           </a>
           <a
-            href="/CV_JuanIsaza.pdf"
+            href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/CV_JuanIsaza.pdf`}
             className="rounded-md border border-neutral-300 dark:border-neutral-700 px-5 py-2.5 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-colors"
           >
             Descargar CV
