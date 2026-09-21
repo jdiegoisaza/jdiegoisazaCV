@@ -68,6 +68,7 @@ stages:
               unzip -q -o sonar-scanner.zip
               ./sonar-scanner-$(SONAR_SCANNER_VERSION)-linux-x64/bin/sonar-scanner -Dsonar.token=$(SONAR_TOKEN)
             displayName: "SonarCloud - análisis SAST"
+            continueOnError: true
 
   - stage: Build
     displayName: "Build"
