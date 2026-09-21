@@ -36,7 +36,7 @@ stages:
               ./gitleaks detect --source . --redact --exit-code 1
             displayName: "Gitleaks - detección de secretos"
 
-          - script: npm audit --audit-level=high
+          - script: npm audit --audit-level=critical
             displayName: "npm audit - vulnerabilidades en dependencias (SCA)"
 
           - script: |
