@@ -109,7 +109,7 @@ export const habilidades = [
     ],
   },
   { categoria: "Cloud", items: ["Azure (avanzado)", "AKS (soporte)", "GCP (básico)", "AWS (básico)"] },
-  { categoria: "Contenedores", items: ["Docker (intermedio)", "Kubernetes (en desarrollo)"] },
+  { categoria: "Contenedores", items: ["Docker (intermedio)", "Kubernetes (intermedio)"] },
   { categoria: "IaC", items: ["Terraform", "YAML Pipelines"] },
   {
     categoria: "DevSecOps (SAST/SCA)",
