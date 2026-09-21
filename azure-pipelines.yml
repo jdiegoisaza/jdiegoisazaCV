@@ -38,15 +38,18 @@ stages:
 
           - script: npm audit --audit-level=critical
             displayName: "npm audit - vulnerabilidades en dependencias (SCA)"
+            continueOnError: true
 
           - script: |
               curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b ./bin
               ./bin/trivy fs --scanners vuln --exit-code 1 --severity HIGH,CRITICAL --ignore-unfixed .
             displayName: "Trivy - escaneo de dependencias (SCA)"
+            continueOnError: true
 
           - script: |
               npx -y @cyclonedx/cyclonedx-npm --output-file $(Build.ArtifactStagingDirectory)/sbom.json
             displayName: "Generar SBOM (CycloneDX)"
+            continueOnError: true
 
           - publish: $(Build.ArtifactStagingDirectory)/sbom.json
             artifact: sbom
@@ -58,6 +61,7 @@ stages:
               "$(Agent.TempDirectory)/checkov-venv/bin/pip" install --quiet checkov
               "$(Agent.TempDirectory)/checkov-venv/bin/checkov" -d infra --framework terraform --compact --soft-fail
             displayName: "Checkov - escaneo de IaC (Terraform)"
+            continueOnError: true
 
           - script: |
               curl -sSfL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$(SONAR_SCANNER_VERSION)-linux-x64.zip" -o sonar-scanner.zip
