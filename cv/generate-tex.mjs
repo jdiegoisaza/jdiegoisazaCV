@@ -122,7 +122,13 @@ function buildPortafolio({ proyectos, ui }) {
       .map((r) => `\\href{${r.url}}{${escapeLatex(r.label)}}`)
       .join(", ");
 
-    const descParts = [`\\textit{${escapeLatex(p.subtitulo)}.} ${escapeLatex(p.resumen)}`];
+    // resumenCV (opcional) es la versión resumida para el PDF: reemplaza subtítulo + resumen.
+    // El sitio siempre muestra subtitulo + resumen completos.
+    const descParts = [
+      p.resumenCV
+        ? escapeLatex(p.resumenCV)
+        : `\\textit{${escapeLatex(p.subtitulo)}.} ${escapeLatex(p.resumen)}`,
+    ];
     if (links) descParts.push(`\\textbf{${escapeLatex(ui.pdf.repositorio)}:} ${links}`);
 
     return [

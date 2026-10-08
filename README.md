@@ -7,7 +7,7 @@ Sitio de una sola página (Next.js 16 + App Router + Tailwind v4), bilingüe. El
 | Español | `app/data/cv.mjs`      | `/`    | `public/CV_JuanIsaza.pdf`        |
 | Inglés  | `app/data/cv.en.mjs`   | `/en`  | `public/CV_JuanIsaza_EN.pdf`     |
 
-Ambos archivos tienen **la misma forma** (mismas claves). Para cambiar algo, edita el valor en el archivo del idioma correspondiente; si agregas un trabajo, proyecto o habilidad, agrégalo en los dos. El objeto `ui` de cada archivo contiene los textos de interfaz (menú, títulos, botones) y los títulos de sección del PDF.
+Ambos archivos tienen **la misma forma** (mismas claves). Para cambiar algo, edita el valor en el archivo del idioma correspondiente; si agregas un trabajo, proyecto o habilidad, agrégalo en los dos. El objeto `ui` de cada archivo contiene los textos de interfaz (menú, títulos, botones) y los títulos de sección del PDF. Algunos campos son solo para el PDF: `perfil.perfilCV` (perfil extendido) y `proyectos[].resumenCV` (versión resumida de cada proyecto, para que el CV quepa en 2 páginas; el sitio muestra `subtitulo` + `resumen` completos).
 
 ## Desarrollo local
 

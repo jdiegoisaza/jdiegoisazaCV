@@ -1,9 +1,9 @@
 // ENGLISH content for the site (/en) AND the English PDF (public/CV_JuanIsaza_EN.pdf).
 // Same shape as cv.mjs — keep the same keys; only the values change.
-// TODO(traducir): todo lo que está debajo de `ui` sigue en español (copiado de cv.mjs). Tradúcelo aquí.
+// Cuando cambies algo en cv.mjs, refleja el mismo cambio aquí (y viceversa).
 // mobile/nombrePila/apellidos/perfilCV exist only for the PDF — no site component uses them.
 
-// UI strings (menu, section titles, buttons) and PDF section titles — already translated.
+// UI strings (menu, section titles, buttons) and PDF section titles.
 export const ui = {
   lang: "en",
   metaTitulo: "Juan Diego Isaza Londoño — DevSecOps Specialist",
@@ -50,93 +50,93 @@ export const perfil = {
   nombre: "Juan Diego Isaza Londoño",
   nombrePila: "Juan Diego",
   apellidos: "Isaza Londoño",
-  titulo: "Especialista DevSecOps · Ingeniero de Sistemas",
+  titulo: "DevSecOps Specialist · Systems Engineer",
   ubicacion: "Medellín, Colombia",
   mobile: "+57 301 2951921",
   email: "juan.diego-13@hotmail.com",
   github: "https://github.com/jdiegoisaza",
   linkedin: "https://linkedin.com/in/jdiegoisaza",
-  // Solo para el PDF (\extrainfo en el header, después de LinkedIn).
+  // PDF only (\extrainfo in the header, after LinkedIn).
   sitioWeb: "https://salmon-bush-02614530f.7.azurestaticapps.net/en",
   resumen:
-    "Especialista DevSecOps con foco en Azure DevOps, automatización de pipelines CI/CD y estandarización de controles de seguridad a escala organizacional. Diseñé un sistema propio de extensiones y pipeline decorators que inyecta automáticamente controles DevSecOps en cientos de pipelines y decenas de repositorios, y estuve encargado de la homologación de las herramientas DevSecOps de Bancolombia hacia Banco Agrícola (Grupo Cibest, El Salvador), incluyendo contribución directa al proyecto open source Engine Tools.",
-  // Versión más completa usada en el PDF (el hero del sitio usa la versión corta de arriba).
+    "DevSecOps Specialist focused on Azure DevOps, CI/CD pipeline automation and organization-wide standardization of security controls. I designed a custom system of extensions and pipeline decorators that automatically injects DevSecOps controls into hundreds of pipelines and dozens of repositories, and I owned the adoption of Bancolombia's DevSecOps tooling at Banco Agrícola (Grupo Cibest, El Salvador), including direct contributions to the open source Engine Tools project.",
+  // Longer version used in the PDF (the site hero uses the short version above).
   perfilCV:
-    "Especialista DevSecOps con foco en Azure DevOps, automatización de pipelines CI/CD y estandarización de controles de seguridad a escala organizacional. Diseñé un sistema propio de extensiones y pipeline decorators que inyecta automáticamente controles DevSecOps en más de 600 pipelines y repositorios, y estuve encargado de la homologación de las herramientas DevSecOps de Bancolombia hacia Banco Agrícola (Grupo Cibest, El Salvador), incluyendo contribución directa al proyecto open source Engine Tools. Ingeniero de Sistemas (Universidad de Antioquia), con bases en desarrollo web (Java, Angular). Experiencia integrando controles SAST, SCA, detección de secretos y escaneo de IaC (SonarQube, JFrog Xray, Trivy, Gitleaks, TruffleHog, Checkov). Certificado en Google Cloud (incluye fundamentos de Kubernetes). Orientado a seguridad desde el diseño (shift-left), automatización con Python, PowerShell y Bash, y colaboración ágil (Scrum).",
+    "DevSecOps Specialist focused on Azure DevOps, CI/CD pipeline automation and organization-wide standardization of security controls. I designed a custom system of extensions and pipeline decorators that automatically injects DevSecOps controls into hundreds of pipelines and dozens of repositories, and I owned the adoption of Bancolombia's DevSecOps tooling at Banco Agrícola (Grupo Cibest, El Salvador), including direct contributions to the open source Engine Tools project. Systems Engineer (Universidad de Antioquia) with a background in web development (Java, Angular). Hands-on experience integrating SAST, SCA, secrets detection and IaC scanning (SonarQube, JFrog Xray, Trivy, Gitleaks, TruffleHog, Checkov). Google Cloud certified (including Kubernetes fundamentals). Committed to security by design (shift-left), automation with Python, PowerShell and Bash, and agile collaboration (Scrum).",
 };
 
 export const experiencia = [
   {
-    puesto: "Especialista Azure DevOps",
+    puesto: "Azure DevOps Specialist",
     empresa: "Synergy TPC",
-    ubicacion: "Remoto",
-    periodo: "Nov 2025 -- Actualidad",
+    ubicacion: "Remote",
+    periodo: "Nov 2025 -- Present",
     bullets: [
-      "Diseñé, implementé y mantuve pipelines de despliegue automatizado alineados con las mejores prácticas de la industria.",
-      "Acompañé a los equipos de desarrollo en la optimización de sus procesos de construcción, liberación y despliegue.",
-      "Aseguré el cumplimiento de los estándares de liberación, incluyendo estrategias de reversión, pruebas, control de versiones y documentación operativa.",
-      "Apoyé el cumplimiento de requisitos organizacionales, regulatorios y de auditoría, aplicando buenas prácticas de privacidad, disponibilidad e integridad de la información.",
+      "Designed, implemented and maintained automated deployment pipelines aligned with industry best practices.",
+      "Supported development teams in optimizing their build, release and deployment processes.",
+      "Ensured adherence to release standards, including rollback strategies, testing, version control and operational documentation.",
+      "Supported compliance with organizational, regulatory and audit requirements, applying best practices for information privacy, availability and integrity.",
     ],
   },
   {
-    puesto: "Especialista DevSecOps",
+    puesto: "DevSecOps Specialist",
     empresa: "Devco",
-    ubicacion: "Remoto",
-    periodo: "Jun 2023 -- Abr 2026",
+    ubicacion: "Remote",
+    periodo: "Jun 2023 -- Apr 2026",
     bullets: [
-      "Rol funcional de Analista DevOps dentro del equipo DevSecOps, asignado como servicio dedicado a Banco Agrícola (Grupo Cibest, El Salvador), aliado estratégico de Bancolombia.",
-      "Diseñé y desarrollé múltiples extensiones personalizadas (5+) de Azure DevOps, inyectadas automáticamente mediante pipeline decorators de creación propia, estandarizando controles de seguridad y automatización en más de 60 pipelines y repositorios organizados en un esquema centralizado, sin requerir configuración manual por equipo.",
-      "Estuve encargado de la homologación de las herramientas DevSecOps utilizadas por Bancolombia hacia Banco Agrícola, incluyendo la adaptación del motor interno Engine Tools, al cual contribuí directamente como colaborador del proyecto open source.",
-      "Eliminé tareas manuales de línea de comandos mediante extensiones reutilizables, reduciendo la intervención manual de múltiples equipos de desarrollo en operaciones repetitivas de pipeline.",
-      "Construí un sistema de inventario y reportes automáticos de pipelines, repositorios y cumplimiento de estándares DevSecOps, aportando visibilidad de gobierno a nivel organizacional.",
-      "Integré y operé controles de seguridad en el pipeline: SonarQube (SAST), JFrog Xray y Trivy (SCA / escaneo de contenedores), Gitleaks y TruffleHog (detección de secretos) y Checkov (escaneo de IaC), gestionando artefactos en JFrog Artifactory.",
-      "Administré Azure Repos, Azure Boards, Azure Artifacts y Environments, definiendo estrategias de branching y control de aprobaciones por ambiente.",
-      "Automaticé procesos de integración y despliegue con Python, PowerShell, Bash y YAML, consumiendo la API REST de Azure DevOps y Azure CLI.",
-      "Soporte en contenedores con Docker y despliegues sobre Azure Kubernetes Service (AKS), en desarrollo continuo de habilidades Kubernetes; colaboración en observabilidad básica con Prometheus y Grafana, dentro de un marco ágil (Scrum).",
+      "Served as DevOps Analyst within the DevSecOps team, assigned as a dedicated resource to Banco Agrícola (Grupo Cibest, El Salvador), a strategic partner of Bancolombia.",
+      "Designed and built multiple (5+) custom Azure DevOps extensions, automatically injected through self-developed pipeline decorators, standardizing security controls and automation across hundreds of pipelines and dozens of repositories under a centralized model, with no per-team manual configuration.",
+      "Owned the adoption of Bancolombia's DevSecOps tooling at Banco Agrícola, including the adaptation of the internal Engine Tools engine, to which I contributed directly as a collaborator on the open source project.",
+      "Eliminated manual command-line tasks through reusable extensions, reducing manual intervention by multiple development teams in repetitive pipeline operations.",
+      "Built an automated inventory and reporting system for pipelines, repositories and DevSecOps standards compliance, providing organization-wide governance visibility.",
+      "Integrated and operated pipeline security controls: SonarQube (SAST), JFrog Xray and Trivy (SCA / container scanning), Gitleaks and TruffleHog (secrets detection) and Checkov (IaC scanning), managing artifacts in JFrog Artifactory.",
+      "Administered Azure Repos, Azure Boards, Azure Artifacts and Environments, defining branching strategies and per-environment approval gates.",
+      "Automated integration and deployment processes with Python, PowerShell, Bash and YAML, using the Azure DevOps REST API and Azure CLI.",
+      "Supported containerized workloads with Docker and deployments to Azure Kubernetes Service (AKS); contributed to basic observability with Prometheus and Grafana, within an agile (Scrum) framework.",
     ],
   },
   {
-    puesto: "Practicante TI (Desarrollo Web)",
+    puesto: "IT Intern (Web Development)",
     empresa: "Fiduciaria Bancolombia",
     ubicacion: "Medellín, Colombia",
-    periodo: "Jun 2022 -- Dic 2022",
+    periodo: "Jun 2022 -- Dec 2022",
     bullets: [
-      "Desarrollé módulos de aplicaciones web internas con Java, Spring Boot y Angular.",
-      "Colaboré en la automatización de despliegues y en la documentación de lineamientos DevOps del equipo.",
+      "Developed modules for internal web applications using Java, Spring Boot and Angular.",
+      "Contributed to deployment automation and to documenting the team's DevOps guidelines.",
     ],
   },
   {
-    puesto: "Monitor Arquitectura de Software",
+    puesto: "Software Architecture Teaching Assistant",
     empresa: "Universidad de Antioquia",
     ubicacion: "Medellín, Colombia",
     periodo: "Nov 2019 -- Sep 2020",
     bullets: [
-      "Soporte académico en arquitectura de software y POO.",
-      "Acompañamiento a estudiantes en proyectos técnicos.",
+      "Provided academic support in software architecture and object-oriented programming (OOP).",
+      "Mentored students on technical projects.",
     ],
   },
   {
-    puesto: "Desarrollador",
+    puesto: "Developer",
     empresa: "Telemedellín",
     ubicacion: "Medellín, Colombia",
-    periodo: "Feb 2019 -- Ene 2020",
+    periodo: "Feb 2019 -- Jan 2020",
     bullets: [
-      "Desarrollo y soporte de experiencias digitales del Tour Telemedellín.",
-      "Mantenimiento de interfaces y mejora de funcionalidades.",
+      "Developed and supported digital experiences for the Telemedellín Tour.",
+      "Maintained user interfaces and improved existing features.",
     ],
   },
 ];
 
 export const educacion = [
   {
-    titulo: "Ingeniería de Sistemas",
+    titulo: "Systems Engineering",
     institucion: "Universidad de Antioquia",
     ubicacion: "Medellín, Colombia",
     periodo: "2015 -- 2023",
-    detalle: "Egresado",
+    detalle: "Graduated",
   },
   {
-    titulo: "Bachiller Académico",
+    titulo: "High School Diploma",
     institucion: "I.E. Campo Valdés",
     ubicacion: "Medellín, Colombia",
     periodo: "2012",
@@ -153,21 +153,21 @@ export const habilidades = [
       "Git",
     ],
   },
-  { categoria: "Cloud", items: ["Azure (avanzado)", "AKS (soporte)", "GCP (básico)", "AWS (básico)"] },
-  { categoria: "Contenedores", items: ["Docker (intermedio)", "Kubernetes (en desarrollo)"] },
+  { categoria: "Cloud", items: ["Azure (advanced)", "AKS (support)", "GCP (basic)", "AWS (basic)"] },
+  { categoria: "Containers", items: ["Docker (intermediate)", "Kubernetes (intermediate)"] },
   { categoria: "IaC", items: ["Terraform", "YAML Pipelines"] },
   {
     categoria: "DevSecOps (SAST/SCA)",
     items: ["SonarQube", "JFrog Xray", "Trivy", "Checkov (IaC Scanning)", "OWASP Top 10"],
   },
   {
-    categoria: "Secretos & Artefactos",
+    categoria: "Secrets & Artifacts",
     items: ["Gitleaks", "TruffleHog (Secrets Detection)", "Artifactory", "SBOM"],
   },
   { categoria: "Scripting", items: ["Python", "PowerShell", "Bash"] },
-  { categoria: "Observabilidad", items: ["Prometheus", "Grafana"] },
-  { categoria: "Desarrollo", items: ["Java", "Spring Boot", "Python", "TypeScript", "Angular", "React"] },
-  { categoria: "Bases de Datos", items: ["SQL", "NoSQL"] },
+  { categoria: "Observability", items: ["Prometheus", "Grafana"] },
+  { categoria: "Development", items: ["Java", "Spring Boot", "Python", "TypeScript", "Angular", "React"] },
+  { categoria: "Databases", items: ["SQL", "NoSQL"] },
   { categoria: "Agile", items: ["Scrum", "Kanban"] },
 ];
 
@@ -184,37 +184,72 @@ export const certificaciones = [
 
 export const proyectos = [
   {
-    titulo: "Gobernanza automática de CI/CD a escala",
-    subtitulo: "Extensiones + pipeline decorators propios (Devco / Banco Agrícola)",
+    titulo: "linceo — DevSecOps Orchestrator",
+    subtitulo: "Personal open source project (Apache-2.0) — published on PyPI and GHCR",
     resumen:
-      "Diseño y desarrollo de un sistema de extensiones de Azure DevOps inyectadas automáticamente vía pipeline decorators, estandarizando controles DevSecOps en más de 60 pipelines sin configuración manual por equipo.",
+      "Orchestrator that unifies how security scans are run and interpreted in a pipeline: it runs Gitleaks, Trivy and Checkov against secrets, dependencies, infrastructure as code and container images, normalizes findings into a common model, applies the organization's policy —local or centralized in a repository that every pipeline inherits— and returns a single verdict, with SARIF export so findings show up on the code. Hexagonal architecture: the core knows no tool by name and every integration is discovered through entry points, so the third and fourth integrations landed without changing the contracts. Runs locally, on Azure DevOps and on GitHub Actions, and ships as a PyPI package and as a container image bundling the tools and the vulnerability database for offline use.",
+    resumenCV:
+      "Open source orchestrator (Python, Apache-2.0) that runs Gitleaks, Trivy and Checkov, normalizes findings, applies the organization's policy and returns a single verdict with SARIF. Hexagonal architecture; published on PyPI and GHCR.",
+    stack: ["Python", "Gitleaks", "Trivy", "Checkov", "SARIF", "Docker", "Azure DevOps", "GitHub Actions"],
+    repos: [
+      { label: "GitHub", url: "https://github.com/jdiegoisaza/linceo" },
+      { label: "PyPI", url: "https://pypi.org/project/linceo/" },
+      { label: "GHCR", url: "https://github.com/jdiegoisaza/linceo/pkgs/container/linceo" },
+    ],
+  },
+  {
+    titulo: "linceo DevSecOps Scan — Azure DevOps Extension",
+    subtitulo: "Personal project, published on the Visual Studio Marketplace",
+    resumen:
+      "Extension that turns running linceo into two native Azure Pipelines tasks: it replaces a docker run with twelve environment variables, a mount point and the build identity token mapping with three lines of configuration. It maps exit codes to task results, distinguishing a gate that failed on findings (configurable) from a broken tool (always fails), because a green pipeline that never actually scanned is worse than a red one. Includes an installer task that downloads the tools with checksum verification and caching across runs, with no dependency on Docker or a 2.4 GB image. Fully automated release: every push builds and validates the package, and every tag publishes to the Marketplace.",
+    resumenCV:
+      "Azure DevOps extension (TypeScript) that turns linceo into native Azure Pipelines tasks, with checksum-verified tool installation and automated release to the Marketplace.",
+    stack: ["TypeScript", "Azure DevOps", "Azure Pipelines", "CI/CD"],
+    repos: [
+      { label: "GitHub", url: "https://github.com/jdiegoisaza/linceo-DevSecOps-Scan" },
+      { label: "Marketplace", url: "https://marketplace.visualstudio.com/items?itemName=juandiego-13.linceo-devsecops-scan" },
+    ],
+  },
+  {
+    titulo: "Automated CI/CD governance at scale",
+    subtitulo: "Custom extensions + pipeline decorators (Devco / Banco Agrícola)",
+    resumen:
+      "Designed and built a system of Azure DevOps extensions automatically injected through pipeline decorators, standardizing DevSecOps controls across hundreds of pipelines with no per-team manual configuration.",
+    resumenCV:
+      "Azure DevOps extensions injected through self-developed pipeline decorators that standardize DevSecOps controls across hundreds of pipelines with no per-team configuration (Devco / Banco Agrícola).",
     stack: ["Azure DevOps", "YAML", "PowerShell", "Python", "Azure DevOps REST API"],
     repos: [
       {
-        label: "Ver ejemplo público del patrón",
+        label: "See a public example of the pattern",
         url: "https://github.com/jdiegoisaza/Decorator_DevOps",
       },
     ],
   },
   {
-    titulo: "Homologación DevSecOps Bancolombia → Banco Agrícola",
-    subtitulo: "Adaptación y contribución open source al motor Engine Tools",
+    titulo: "DevSecOps tooling alignment: Bancolombia → Banco Agrícola",
+    subtitulo: "Adaptation of and open source contribution to the Engine Tools engine",
     resumen:
-      "Homologación de herramientas DevSecOps entre dos entidades del mismo grupo bancario, incluyendo contribución directa al proyecto open source Engine Tools de Bancolombia.",
+      "Aligned DevSecOps tooling across two entities of the same banking group, including direct contributions to Bancolombia's open source Engine Tools project.",
+    resumenCV:
+      "Aligned DevSecOps tooling across two entities of the same banking group, with direct contributions to the open source Engine Tools project.",
     stack: ["Azure DevOps", "Engine Tools", "SonarQube", "JFrog Xray", "Trivy"],
   },
   {
-    titulo: "De GitHub Pages a un pipeline DevSecOps propio en Azure",
-    subtitulo: "Este mismo sitio: Azure Static Web Apps + Azure DevOps + Terraform",
+    titulo: "From GitHub Pages to my own DevSecOps pipeline on Azure",
+    subtitulo: "This very site: Azure Static Web Apps + Azure DevOps + Terraform",
     resumen:
-      "Migré este portafolio a un pipeline propio en Azure DevOps (agente self-hosted) con un stage de seguridad real —Gitleaks, npm audit, Trivy, SBOM y Checkov— antes de compilar y desplegar a Azure Static Web Apps. Infraestructura versionada en Terraform, importada desde los recursos existentes sin downtime.",
+      "Migrated this portfolio to my own Azure DevOps pipeline (self-hosted agent) with a real security stage —Gitleaks, npm audit, Trivy, SBOM and Checkov— before building and deploying to Azure Static Web Apps. Infrastructure is versioned in Terraform, imported from the existing resources with zero downtime.",
+    resumenCV:
+      "This site: own Azure DevOps pipeline with a security stage (Gitleaks, npm audit, Trivy, SBOM, Checkov) deploying to Azure Static Web Apps with Terraform.",
     stack: ["Azure Static Web Apps", "Azure DevOps Pipelines", "Terraform", "Gitleaks", "Trivy", "Checkov", "SonarCloud"],
   },
   {
-    titulo: "Extensiones y pipeline decorators para Azure DevOps",
-    subtitulo: "Proyecto propio, open source — el mismo patrón usado en Devco",
+    titulo: "Extensions and pipeline decorators for Azure DevOps",
+    subtitulo: "Personal open source project — the same pattern used at Devco",
     resumen:
-      "Implementación pública y genérica del patrón de pipeline decorators: una extensión con 9 decorators (Gitleaks, Checkov, Trivy, Hadolint, auditoría de builds y releases, detección de rollback) que se inyectan automáticamente en cualquier pipeline de la organización, sin configuración manual por equipo. Incluye además la plantilla reutilizable para construir nuevas tareas personalizadas en TypeScript y Python.",
+      "Public, generic implementation of the pipeline decorator pattern: one extension with 9 decorators (Gitleaks, Checkov, Trivy, Hadolint, build and release auditing, rollback detection) automatically injected into every pipeline in the organization, with no per-team manual configuration. Also includes a reusable template for building new custom tasks in TypeScript and Python.",
+    resumenCV:
+      "Public version of the pattern: one extension with 9 security and auditing decorators injected into every pipeline, plus a template for tasks in TypeScript and Python.",
     stack: ["Azure DevOps", "TypeScript", "Python", "Gitleaks", "Checkov", "Trivy", "Hadolint"],
     repos: [
       { label: "Decorator_DevOps", url: "https://github.com/jdiegoisaza/Decorator_DevOps" },
