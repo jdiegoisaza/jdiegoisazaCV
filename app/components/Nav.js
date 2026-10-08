@@ -3,22 +3,20 @@
 import { useEffect, useState } from "react";
 import ThemeToggle from "@/app/components/ThemeToggle";
 
-const links = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#experiencia", label: "Experiencia" },
-  { href: "#habilidades", label: "Habilidades" },
-  { href: "#portafolio", label: "Portafolio" },
-  { href: "#contacto", label: "Contacto" },
-];
+// Los ids de sección son los mismos en ambos idiomas; solo cambia la etiqueta (ui.nav).
+const sectionIds = ["inicio", "experiencia", "habilidades", "portafolio", "contacto"];
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-export default function Nav() {
+export default function Nav({ ui }) {
+  const links = sectionIds.map((id) => ({ href: `#${id}`, label: ui.nav[id] }));
+  const otroIdiomaHref = `${basePath}${ui.otroIdioma.href}`;
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("inicio");
   const [isDark, setIsDark] = useState(null);
 
   useEffect(() => {
-    const sections = links
-      .map((link) => document.getElementById(link.href.slice(1)))
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
       .filter(Boolean);
 
     const observer = new IntersectionObserver(
@@ -54,12 +52,13 @@ export default function Nav() {
         </a>
 
         <div className="flex items-center gap-2 sm:hidden">
-          <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+          <LangLink href={otroIdiomaHref} ui={ui} />
+          <ThemeToggle isDark={isDark} onToggle={toggleTheme} ui={ui} />
           <button
             type="button"
             className="text-neutral-700 dark:text-neutral-300"
             onClick={() => setOpen((v) => !v)}
-            aria-label="Abrir menú"
+            aria-label={ui.nav.abrirMenu}
           >
             {open ? "✕" : "☰"}
           </button>
@@ -90,7 +89,10 @@ export default function Nav() {
               );
             })}
           </ul>
-          <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+          <div className="flex items-center gap-1">
+            <LangLink href={otroIdiomaHref} ui={ui} />
+            <ThemeToggle isDark={isDark} onToggle={toggleTheme} ui={ui} />
+          </div>
         </div>
       </nav>
 
@@ -110,5 +112,19 @@ export default function Nav() {
         </ul>
       )}
     </header>
+  );
+}
+
+function LangLink({ href, ui }) {
+  return (
+    <a
+      href={href}
+      hrefLang={ui.lang === "es" ? "en" : "es"}
+      title={ui.otroIdioma.titulo}
+      aria-label={ui.otroIdioma.titulo}
+      className="inline-flex items-center justify-center h-9 px-2 rounded-md text-xs font-semibold tracking-wide text-neutral-600 hover:text-blue-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-blue-400 dark:hover:bg-neutral-800 transition-colors"
+    >
+      {ui.otroIdioma.label}
+    </a>
   );
 }

@@ -84,7 +84,7 @@ stages:
             displayName: "Instalar Node.js"
 
           - script: node cv/generate-tex.mjs
-            displayName: "Generar cv/resume.tex desde app/data/cv.mjs"
+            displayName: "Generar cv/resume.tex (ES) y cv/resume_en.tex (EN) desde app/data/"
 
           - script: |
               docker run --rm -v "$(System.DefaultWorkingDirectory)/cv:/data" -w /data texlive/texlive:latest bash -c "
@@ -92,14 +92,17 @@ stages:
                 cp fonts/*.ttf ~/.fonts/ &&
                 fc-cache -f &&
                 xelatex -interaction=nonstopmode -halt-on-error resume.tex &&
-                xelatex -interaction=nonstopmode -halt-on-error resume.tex
+                xelatex -interaction=nonstopmode -halt-on-error resume.tex &&
+                xelatex -interaction=nonstopmode -halt-on-error resume_en.tex &&
+                xelatex -interaction=nonstopmode -halt-on-error resume_en.tex
               "
             displayName: "Compilar CV (Docker + TeX Live)"
 
           - script: |
               mkdir -p public
               cp cv/resume.pdf public/CV_JuanIsaza.pdf
-            displayName: "Copiar CV compilado a public/"
+              cp cv/resume_en.pdf public/CV_JuanIsaza_EN.pdf
+            displayName: "Copiar CVs compilados a public/"
 
           - script: |
               npm ci

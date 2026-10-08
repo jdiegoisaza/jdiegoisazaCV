@@ -1,16 +1,17 @@
-// Genera cv/resume.tex a partir de resume.template.tex + app/data/cv.mjs.
-// Fuente de verdad del contenido: app/data/cv.mjs (la misma que usa el sitio).
+// Genera un .tex por idioma a partir de resume.template.tex + los datos del sitio:
+//   app/data/cv.mjs    -> cv/resume.tex     (español)
+//   app/data/cv.en.mjs -> cv/resume_en.tex  (inglés)
+// Fuente de verdad del contenido: esos archivos (los mismos que usa el sitio).
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import {
-  perfil,
-  experiencia,
-  educacion,
-  habilidades,
-  certificaciones,
-  proyectos,
-} from "../app/data/cv.mjs";
+import * as cvEs from "../app/data/cv.mjs";
+import * as cvEn from "../app/data/cv.en.mjs";
+
+const idiomas = [
+  { cv: cvEs, salida: "resume.tex", fuente: "app/data/cv.mjs" },
+  { cv: cvEn, salida: "resume_en.tex", fuente: "app/data/cv.en.mjs" },
+];
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -27,7 +28,7 @@ function handleFromUrl(url, host) {
   return url.replace(new RegExp(`^https?://(www\\.)?${host}/(in/)?`), "").replace(/\/$/, "");
 }
 
-function buildHeader() {
+function buildHeader({ perfil }) {
   const [tituloPrincipal, tituloSecundario] = perfil.titulo
     .split("·")
     .map((s) => s.trim());
@@ -44,7 +45,7 @@ function buildHeader() {
   ].join("\n");
 }
 
-function buildExperiencia() {
+function buildExperiencia({ experiencia, ui }) {
   const entries = experiencia.map((job) => {
     const bullets = job.bullets
       .map((b) => `      \\item ${escapeLatex(b)}`)
@@ -63,12 +64,12 @@ function buildExperiencia() {
     ].join("\n");
   });
 
-  return ["%----------- EXPERIENCIA -----------", "\\cvsection{Experiencia}", entries.join("\n\n")].join(
+  return ["%----------- EXPERIENCIA -----------", `\\cvsection{${escapeLatex(ui.pdf.experiencia)}}`, entries.join("\n\n")].join(
     "\n"
   );
 }
 
-function buildEducacion() {
+function buildEducacion({ educacion, ui }) {
   const entries = educacion.map(
     (edu) =>
       `\\cventry{${escapeLatex(edu.periodo)}}{${escapeLatex(edu.titulo)}}{${escapeLatex(
@@ -78,26 +79,26 @@ function buildEducacion() {
 
   return [
     "%----------- EDUCACIÓN -----------",
-    "\\cvsection{Educación}",
+    `\\cvsection{${escapeLatex(ui.pdf.educacion)}}`,
     entries.join("\n"),
   ].join("\n");
 }
 
-function buildHabilidades() {
+function buildHabilidades({ habilidades, ui }) {
   const entries = habilidades.map(
     (h) => `  \\cvskill{${escapeLatex(h.categoria)}}{${escapeLatex(h.items.join(", "))}}`
   );
 
   return [
     "%----------- HABILIDADES -----------",
-    "\\cvsection{Habilidades Técnicas}",
+    `\\cvsection{${escapeLatex(ui.pdf.habilidades)}}`,
     "\\begin{cvskills}",
     entries.join("\n"),
     "\\end{cvskills}",
   ].join("\n");
 }
 
-function buildCertificaciones() {
+function buildCertificaciones({ certificaciones, ui }) {
   // Si hay "detalle", el emisor va en la columna derecha (#3); si no, el emisor
   // va inline junto al título (#2) para no dejar una columna derecha vacía.
   const entries = certificaciones.map((c) => {
@@ -107,14 +108,14 @@ function buildCertificaciones() {
 
   return [
     "%----------- CERTIFICACIONES -----------",
-    "\\cvsection{Certificaciones}",
+    `\\cvsection{${escapeLatex(ui.pdf.certificaciones)}}`,
     "\\begin{cvhonors}",
     entries.join("\n"),
     "\\end{cvhonors}",
   ].join("\n");
 }
 
-function buildPortafolio() {
+function buildPortafolio({ proyectos, ui }) {
   const entries = proyectos.map((p) => {
     const stack = escapeLatex((p.stack || []).join(", "));
     const links = (p.repos || [])
@@ -122,7 +123,7 @@ function buildPortafolio() {
       .join(", ");
 
     const descParts = [`\\textit{${escapeLatex(p.subtitulo)}.} ${escapeLatex(p.resumen)}`];
-    if (links) descParts.push(`\\textbf{Repositorio:} ${links}`);
+    if (links) descParts.push(`\\textbf{${escapeLatex(ui.pdf.repositorio)}:} ${links}`);
 
     return [
       "\\cventry",
@@ -134,34 +135,38 @@ function buildPortafolio() {
     ].join("\n");
   });
 
-  return ["%----------- PORTAFOLIO -----------", "\\cvsection{Portafolio}", entries.join("\n\n")].join(
+  return ["%----------- PORTAFOLIO -----------", `\\cvsection{${escapeLatex(ui.pdf.portafolio)}}`, entries.join("\n\n")].join(
     "\n"
   );
 }
 
-function buildBody() {
+function buildBody(cv) {
+  const { ui } = cv;
   return [
     "%----------- PERFIL -----------",
-    "\\cvsection{Perfil Profesional}",
+    `\\cvsection{${escapeLatex(ui.pdf.perfil)}}`,
     "\\begin{cvparagraph}",
-    escapeLatex(perfil.perfilCV),
+    escapeLatex(cv.perfil.perfilCV),
     "\\end{cvparagraph}",
     "",
-    buildExperiencia(),
+    buildExperiencia(cv),
     "",
-    buildEducacion(),
-    buildHabilidades(),
+    buildEducacion(cv),
+    buildHabilidades(cv),
     "",
-    buildCertificaciones(),
+    buildCertificaciones(cv),
     "",
-    buildPortafolio(),
+    buildPortafolio(cv),
   ].join("\n");
 }
 
 const template = readFileSync(join(__dirname, "resume.template.tex"), "utf8");
-const output = template
-  .replace("%%HEADER%%", buildHeader())
-  .replace("%%BODY%%", buildBody());
+for (const { cv, salida, fuente } of idiomas) {
+  // Función de reemplazo para que los "$" del contenido no se interpreten como patrones de replace().
+  const output = template
+    .replace("%%HEADER%%", () => buildHeader(cv))
+    .replace("%%BODY%%", () => buildBody(cv));
 
-writeFileSync(join(__dirname, "resume.tex"), output, "utf8");
-console.log("cv/resume.tex generado desde app/data/cv.mjs");
+  writeFileSync(join(__dirname, salida), output, "utf8");
+  console.log(`cv/${salida} generado desde ${fuente}`);
+}

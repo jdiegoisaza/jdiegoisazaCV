@@ -1,18 +1,18 @@
 import { FolderGit2 } from "lucide-react";
-import { proyectos } from "@/app/data/cv.mjs";
 import Reveal from "@/app/components/Reveal";
 
-export default function Portfolio() {
+export default function Portfolio({ cv }) {
+  const { proyectos, ui } = cv;
   return (
     <section id="portafolio" className="bg-neutral-50 dark:bg-neutral-900/40 transition-colors">
       <div className="max-w-5xl mx-auto px-6 py-20">
         <Reveal>
           <div className="flex items-center gap-2 mb-2">
             <FolderGit2 className="w-5 h-5 text-blue-600 dark:text-blue-400" strokeWidth={2} />
-            <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">Portafolio</h2>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">{ui.secciones.portafolio}</h2>
           </div>
           <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-10">
-            Casos de estudio de proyectos reales, descritos sin datos confidenciales de cliente.
+            {ui.secciones.portafolioIntro}
           </p>
         </Reveal>
 

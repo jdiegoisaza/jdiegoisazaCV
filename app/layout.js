@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ui } from "@/app/data/cv.mjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,9 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const title = "Juan Diego Isaza Londoño — Especialista DevSecOps";
-const description =
-  "Portafolio con casos de estudio reales de automatización DevSecOps en Azure: pipelines, seguridad integrada y despliegue continuo, incluyendo cómo construí y aseguré este mismo sitio.";
+const { metaTitulo: title, metaDescripcion: description } = ui;
 
 export const metadata = {
   metadataBase: new URL("https://salmon-bush-02614530f.7.azurestaticapps.net"),

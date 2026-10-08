@@ -1,6 +1,13 @@
 # Sitio personal — Juan Diego Isaza
 
-Sitio de una sola página (Next.js 16 + App Router + Tailwind v4). **`app/data/cv.mjs` es la única fuente de verdad del contenido** — tanto del sitio como del CV en PDF.
+Sitio de una sola página (Next.js 16 + App Router + Tailwind v4), bilingüe. El contenido vive en dos archivos de datos, que alimentan tanto el sitio como el CV en PDF:
+
+| Idioma  | Archivo de datos       | Página | PDF                              |
+| ------- | ---------------------- | ------ | -------------------------------- |
+| Español | `app/data/cv.mjs`      | `/`    | `public/CV_JuanIsaza.pdf`        |
+| Inglés  | `app/data/cv.en.mjs`   | `/en`  | `public/CV_JuanIsaza_EN.pdf`     |
+
+Ambos archivos tienen **la misma forma** (mismas claves). Para cambiar algo, edita el valor en el archivo del idioma correspondiente; si agregas un trabajo, proyecto o habilidad, agrégalo en los dos. El objeto `ui` de cada archivo contiene los textos de interfaz (menú, títulos, botones) y los títulos de sección del PDF.
 
 ## Desarrollo local
 
@@ -22,13 +29,13 @@ Esto genera la carpeta `out/` con HTML/CSS/JS listos para cualquier hosting est�
 
 ## CV en PDF (`cv/`)
 
-El CV se genera automáticamente a partir de `app/data/cv.mjs` — **no se edita LaTeX a mano**:
+El CV se genera automáticamente a partir de `app/data/cv.mjs` (ES) y `app/data/cv.en.mjs` (EN) — **no se edita LaTeX a mano**:
 
 - `cv/resume.template.tex` — la plantilla (diseño, fuentes, márgenes, fixes de ATS). Solo se toca si cambia el diseño.
-- `cv/generate-tex.mjs` — lee `app/data/cv.mjs` y genera `cv/resume.tex` (contenido real, no se comitea).
+- `cv/generate-tex.mjs` — lee ambos archivos de datos y genera `cv/resume.tex` (ES) y `cv/resume_en.tex` (EN). No se comitean.
 - `cv/fonts/` — Roboto + FontAwesome, empaquetadas (no dependen de fuentes del sistema).
 
-Para editar el contenido del CV, **edita `app/data/cv.mjs`** (mismo archivo que alimenta el sitio) y regenera:
+Para editar el contenido del CV, **edita `app/data/cv.mjs` o `app/data/cv.en.mjs`** (los mismos que alimentan el sitio) y regenera:
 
 ```bash
 node cv/generate-tex.mjs
@@ -42,9 +49,12 @@ cd cv
 docker run --rm -v "$(pwd):/data" -w /data texlive/texlive:latest bash -c "
   mkdir -p ~/.fonts && cp fonts/*.ttf ~/.fonts/ && fc-cache -f &&
   xelatex -interaction=nonstopmode resume.tex &&
-  xelatex -interaction=nonstopmode resume.tex
+  xelatex -interaction=nonstopmode resume.tex &&
+  xelatex -interaction=nonstopmode resume_en.tex &&
+  xelatex -interaction=nonstopmode resume_en.tex
 "
 cp resume.pdf ../public/CV_JuanIsaza.pdf
+cp resume_en.pdf ../public/CV_JuanIsaza_EN.pdf
 ```
 
 En el pipeline esto corre automáticamente en cada push — ver más abajo.
@@ -54,7 +64,7 @@ En el pipeline esto corre automáticamente en cada push — ver más abajo.
 - **Hosting**: Azure Static Web Apps (`infra/` tiene la definición en Terraform).
 - **CI/CD**: Azure DevOps Pipelines (`azure-pipelines.yml`), corriendo en un agente self-hosted, con tres stages:
   1. **Security** — Gitleaks, npm audit, Trivy, SBOM (CycloneDX), Checkov, SonarCloud.
-  2. **Build** — genera y compila el CV (`node cv/generate-tex.mjs` + Docker/TeX Live), copia el PDF a `public/`, compila el sitio (`npm run build`).
+  2. **Build** — genera y compila ambos CV (`node cv/generate-tex.mjs` + Docker/TeX Live), copia los PDF a `public/`, compila el sitio (`npm run build`).
   3. **Deploy** — publica a Azure Static Web Apps vía SWA CLI.
 - Cada push a `main` dispara el pipeline automáticamente.
 

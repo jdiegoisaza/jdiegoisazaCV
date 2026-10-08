@@ -1,18 +1,17 @@
 import { Mail } from "lucide-react";
-import { perfil } from "@/app/data/cv.mjs";
 import Reveal from "@/app/components/Reveal";
 
-export default function Contact() {
+export default function Contact({ cv }) {
+  const { perfil, ui } = cv;
   return (
     <section id="contacto" className="max-w-5xl mx-auto px-6 py-20">
       <Reveal>
         <div className="flex items-center gap-2 mb-4">
           <Mail className="w-5 h-5 text-blue-600 dark:text-blue-400" strokeWidth={2} />
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">Contacto</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">{ui.secciones.contacto}</h2>
         </div>
         <p className="text-neutral-600 dark:text-neutral-400 mb-6 max-w-xl">
-          ¿Buscas un especialista DevSecOps / Azure DevOps para tu equipo? Escríbeme por
-          cualquiera de estos canales.
+          {ui.secciones.contactoIntro}
         </p>
         <div className="flex flex-wrap gap-4 text-sm">
           <a

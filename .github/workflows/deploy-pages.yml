@@ -32,7 +32,7 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: Generar cv/resume.tex desde app/data/cv.mjs
+      - name: Generar cv/resume.tex (ES) y cv/resume_en.tex (EN) desde app/data/
         run: node cv/generate-tex.mjs
 
       - name: Compilar CV (Docker + TeX Live)
@@ -42,13 +42,16 @@ jobs:
             cp fonts/*.ttf ~/.fonts/ &&
             fc-cache -f &&
             xelatex -interaction=nonstopmode -halt-on-error resume.tex &&
-            xelatex -interaction=nonstopmode -halt-on-error resume.tex
+            xelatex -interaction=nonstopmode -halt-on-error resume.tex &&
+            xelatex -interaction=nonstopmode -halt-on-error resume_en.tex &&
+            xelatex -interaction=nonstopmode -halt-on-error resume_en.tex
           "
 
-      - name: Copiar CV compilado a public/
+      - name: Copiar CVs compilados a public/
         run: |
           mkdir -p public
           cp cv/resume.pdf public/CV_JuanIsaza.pdf
+          cp cv/resume_en.pdf public/CV_JuanIsaza_EN.pdf
 
       - name: Build del sitio
         run: npm run build

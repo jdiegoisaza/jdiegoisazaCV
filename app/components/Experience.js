@@ -1,15 +1,15 @@
 import { Briefcase } from "lucide-react";
-import { experiencia } from "@/app/data/cv.mjs";
 import Reveal from "@/app/components/Reveal";
 
-export default function Experience() {
+export default function Experience({ cv }) {
+  const { experiencia, ui } = cv;
   return (
     <section id="experiencia" className="bg-neutral-50 dark:bg-neutral-900/40 transition-colors">
       <div className="max-w-5xl mx-auto px-6 py-20">
         <Reveal>
           <div className="flex items-center gap-2 mb-10">
             <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" strokeWidth={2} />
-            <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">Experiencia</h2>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">{ui.secciones.experiencia}</h2>
           </div>
         </Reveal>
 

@@ -42,8 +42,11 @@ next-env.d.ts
 
 # CV: resume.tex y el PDF se generan en el pipeline a partir de app/data/cv.mjs, no se comitean
 /public/CV_JuanIsaza.pdf
+/public/CV_JuanIsaza_EN.pdf
 cv/resume.tex
+cv/resume_en.tex
 cv/*.aux
 cv/*.log
 cv/*.out
 cv/resume.pdf
+cv/resume_en.pdf
