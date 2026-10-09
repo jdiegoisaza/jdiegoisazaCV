@@ -4,6 +4,9 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  # Semanal (lunes 11:00 UTC): publica insignias nuevas de Credly / Skills Boost sin necesidad de push.
+  schedule:
+    - cron: "0 11 * * 1"
 
 permissions:
   contents: read
@@ -31,6 +34,12 @@ jobs:
 
       - name: npm ci
         run: npm ci
+
+      - name: Instalar poppler (miniaturas de certificados PDF)
+        run: sudo apt-get install -y --no-install-recommends poppler-utils
+
+      - name: Actualizar credenciales (Credly + Google Skills Boost)
+        run: node scripts/fetch-credenciales.mjs
 
       - name: Generar cv/resume.tex (ES) y cv/resume_en.tex (EN) desde app/data/
         run: node cv/generate-tex.mjs

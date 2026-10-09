@@ -59,12 +59,29 @@ cp resume_en.pdf ../public/CV_JuanIsaza_EN.pdf
 
 En el pipeline esto corre automáticamente en cada push — ver más abajo.
 
+## Formación y credenciales
+
+La sección se arma sola a partir de tres fuentes. Se configura en `app/data/credenciales.mjs`:
+
+- **Credly** y **Google Skills Boost** (automáticas): `scripts/fetch-credenciales.mjs` lee los perfiles públicos, descarga las imágenes a `public/credenciales/img/` y escribe `app/data/credenciales.generated.json`. Las insignias nuevas aparecen solas en el siguiente despliegue; los pipelines además corren cada lunes.
+- **Certificados en PDF** (manuales): deja el PDF en `public/credenciales/<carpeta>/` y agrégalo a `manuales`. La miniatura (`<pdf>.png`) la genera el mismo script con `pdftoppm` (poppler).
+
+Para ocultar una credencial del sitio, agrega su id a `ocultar`; para dejarla solo en el sitio y no en el CV en PDF, a `ocultarEnPDF`.
+
+Para actualizar en local (y comitear la copia de respaldo del JSON, imágenes y miniaturas):
+
+```bash
+node scripts/fetch-credenciales.mjs
+```
+
+Si Credly o Skills Boost fallan, el script conserva lo que ya había en el JSON y el build continúa.
+
 ## Infraestructura y despliegue
 
 - **Hosting**: Azure Static Web Apps (`infra/` tiene la definición en Terraform).
 - **CI/CD**: Azure DevOps Pipelines (`azure-pipelines.yml`), corriendo en un agente self-hosted, con tres stages:
   1. **Security** — Gitleaks, npm audit, Trivy, SBOM (CycloneDX), Checkov, SonarCloud.
-  2. **Build** — genera y compila ambos CV (`node cv/generate-tex.mjs` + Docker/TeX Live), copia los PDF a `public/`, compila el sitio (`npm run build`).
+  2. **Build** — actualiza las credenciales (`scripts/fetch-credenciales.mjs`), genera y compila ambos CV (`node cv/generate-tex.mjs` + Docker/TeX Live), copia los PDF a `public/`, compila el sitio (`npm run build`).
   3. **Deploy** — publica a Azure Static Web Apps vía SWA CLI.
 - Cada push a `main` dispara el pipeline automáticamente.
 

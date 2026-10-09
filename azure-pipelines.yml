@@ -3,6 +3,15 @@ trigger:
     include:
       - main
 
+# Semanal (lunes 11:00 UTC): publica insignias nuevas de Credly / Skills Boost sin necesidad de push.
+schedules:
+  - cron: "0 11 * * 1"
+    displayName: "Actualización semanal de credenciales"
+    branches:
+      include:
+        - main
+    always: true
+
 pool:
   name: "Default"
 
@@ -82,6 +91,10 @@ stages:
             inputs:
               versionSpec: $(NODE_VERSION)
             displayName: "Instalar Node.js"
+
+          # Si el agente no tiene pdftoppm, se usan las miniaturas ya comiteadas.
+          - script: node scripts/fetch-credenciales.mjs
+            displayName: "Actualizar credenciales (Credly + Google Skills Boost)"
 
           - script: node cv/generate-tex.mjs
             displayName: "Generar cv/resume.tex (ES) y cv/resume_en.tex (EN) desde app/data/"

@@ -12,6 +12,7 @@ export const ui = {
     inicio: "Inicio",
     experiencia: "Experiencia",
     habilidades: "Habilidades",
+    credenciales: "Formación",
     portafolio: "Portafolio",
     contacto: "Contacto",
     abrirMenu: "Abrir menú",
@@ -26,8 +27,13 @@ export const ui = {
   secciones: {
     experiencia: "Experiencia",
     habilidades: "Habilidades técnicas",
-    certificaciones: "Certificaciones",
     educacion: "Educación",
+    credenciales: "Formación y credenciales",
+    credencialesIntro:
+      "Insignias y certificados de cursos. Cada insignia enlaza a su página de verificación en la plataforma que la emitió.",
+    todos: "Todos",
+    verificar: "Verificar",
+    verCertificado: "Ver certificado",
     portafolio: "Portafolio",
     portafolioIntro: "Casos de estudio de proyectos reales, descritos sin datos confidenciales de cliente.",
     contacto: "Contacto",
@@ -39,7 +45,7 @@ export const ui = {
     experiencia: "Experiencia",
     educacion: "Educación",
     habilidades: "Habilidades Técnicas",
-    certificaciones: "Certificaciones",
+    credenciales: "Formación y Credenciales",
     portafolio: "Portafolio",
     repositorio: "Repositorio",
   },
@@ -61,7 +67,7 @@ export const perfil = {
     "Especialista DevSecOps con foco en Azure DevOps, automatización de pipelines CI/CD y estandarización de controles de seguridad a escala organizacional. Diseñé un sistema propio de extensiones y pipeline decorators que inyecta automáticamente controles DevSecOps en cientos de pipelines y decenas de repositorios, y estuve encargado de la homologación de las herramientas DevSecOps de Bancolombia hacia Banco Agrícola (Grupo Cibest, El Salvador), incluyendo contribución directa al proyecto open source Engine Tools.",
   // Versión más completa usada en el PDF (el hero del sitio usa la versión corta de arriba).
   perfilCV:
-    "Especialista DevSecOps con foco en Azure DevOps, automatización de pipelines CI/CD y estandarización de controles de seguridad a escala organizacional. Diseñé un sistema propio de extensiones y pipeline decorators que inyecta automáticamente controles DevSecOps en cientos de pipelines y decenas de repositorios, y estuve encargado de la homologación de las herramientas DevSecOps de Bancolombia hacia Banco Agrícola (Grupo Cibest, El Salvador), incluyendo contribución directa al proyecto open source Engine Tools. Ingeniero de Sistemas (Universidad de Antioquia), con bases en desarrollo web (Java, Angular). Experiencia integrando controles SAST, SCA, detección de secretos y escaneo de IaC (SonarQube, JFrog Xray, Trivy, Gitleaks, TruffleHog, Checkov). Certificado en Google Cloud (incluye fundamentos de Kubernetes). Orientado a seguridad desde el diseño (shift-left), automatización con Python, PowerShell y Bash, y colaboración ágil (Scrum).",
+    "Especialista DevSecOps con foco en Azure DevOps, automatización de pipelines CI/CD y estandarización de controles de seguridad a escala organizacional. Diseñé un sistema propio de extensiones y pipeline decorators que inyecta automáticamente controles DevSecOps en cientos de pipelines y decenas de repositorios, y estuve encargado de la homologación de las herramientas DevSecOps de Bancolombia hacia Banco Agrícola (Grupo Cibest, El Salvador), incluyendo contribución directa al proyecto open source Engine Tools. Ingeniero de Sistemas (Universidad de Antioquia), con bases en desarrollo web (Java, Angular). Experiencia integrando controles SAST, SCA, detección de secretos y escaneo de IaC (SonarQube, JFrog Xray, Trivy, Gitleaks, TruffleHog, Checkov). Credenciales de Google Cloud Skills Boost (incluye laboratorios de Kubernetes Engine), AWS Skill Builder y The Linux Foundation (GitOps). Orientado a seguridad desde el diseño (shift-left), automatización con Python, PowerShell y Bash, y colaboración ágil (Scrum).",
 };
 
 export const experiencia = [
@@ -168,17 +174,6 @@ export const habilidades = [
   { categoria: "Desarrollo", items: ["Java", "Spring Boot", "Python", "TypeScript", "Angular", "React"] },
   { categoria: "Bases de Datos", items: ["SQL", "NoSQL"] },
   { categoria: "Agile", items: ["Scrum", "Kanban"] },
-];
-
-export const certificaciones = [
-  {
-    titulo: "Google Cloud Platform",
-    detalle: "Fundamentals, Infrastructure, Networking, Data/ML/AI, Kubernetes",
-    emisor: "Google",
-  },
-  { titulo: "Build a Website on GCP", emisor: "Google" },
-  { titulo: "Lifelong Learning", emisor: "CertiProf" },
-  { titulo: "Explore Emerging Tech", emisor: "IBM SkillsBuild" },
 ];
 
 export const proyectos = [

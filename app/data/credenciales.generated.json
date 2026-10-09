@@ -1,0 +1,146 @@
+[
+  {
+    "id": "credly-97ccc3d1-66eb-49f6-aaed-b25016f4540a",
+    "fuente": "credly",
+    "titulo": "Build a Website on Google Cloud Skill Badge",
+    "emisor": "Google Cloud",
+    "fecha": "2026-10-09",
+    "url": "https://www.credly.com/badges/97ccc3d1-66eb-49f6-aaed-b25016f4540a",
+    "imagen": "https://images.credly.com/size/220x220/images/cfcacbf1-1f76-40ad-be09-a5b057e31ebf/image.png"
+  },
+  {
+    "id": "credly-fd2bc9dc-8fb5-4150-9dc1-50899b2dd2d2",
+    "fuente": "credly",
+    "titulo": "Introduction to Cybersecurity",
+    "emisor": "Cisco",
+    "fecha": "2026-10-08",
+    "url": "https://www.credly.com/badges/fd2bc9dc-8fb5-4150-9dc1-50899b2dd2d2",
+    "imagen": "credenciales/img/credly-fd2bc9dc-8fb5-4150-9dc1-50899b2dd2d2.png"
+  },
+  {
+    "id": "credly-028b769c-d1ab-4fa7-8a91-57529b9d4fe3",
+    "fuente": "credly",
+    "titulo": "Python Essentials 1",
+    "emisor": "Cisco",
+    "fecha": "2026-09-21",
+    "url": "https://www.credly.com/badges/028b769c-d1ab-4fa7-8a91-57529b9d4fe3",
+    "imagen": "credenciales/img/credly-028b769c-d1ab-4fa7-8a91-57529b9d4fe3.png"
+  },
+  {
+    "id": "credly-a6c26d4a-5463-42da-bd4e-d22db33625bc",
+    "fuente": "credly",
+    "titulo": "Lifelong Learning 2025",
+    "emisor": "CertiProf",
+    "fecha": "2025-04-24",
+    "url": "https://www.credly.com/badges/a6c26d4a-5463-42da-bd4e-d22db33625bc",
+    "imagen": "credenciales/img/credly-a6c26d4a-5463-42da-bd4e-d22db33625bc.png"
+  },
+  {
+    "id": "credly-e3e02a09-70bf-4660-a4f4-f78dc6aa80bc",
+    "fuente": "credly",
+    "titulo": "LFS169: Introduction to GitOps",
+    "emisor": "The Linux Foundation",
+    "fecha": "2024-04-06",
+    "url": "https://www.credly.com/badges/e3e02a09-70bf-4660-a4f4-f78dc6aa80bc",
+    "imagen": "credenciales/img/credly-e3e02a09-70bf-4660-a4f4-f78dc6aa80bc.png"
+  },
+  {
+    "id": "credly-50a4da6b-cfdc-4c02-82a6-786c04ea0030",
+    "fuente": "credly",
+    "titulo": "LFD103: A Beginner's Guide to Linux Kernel Development",
+    "emisor": "The Linux Foundation",
+    "fecha": "2023-11-16",
+    "url": "https://www.credly.com/badges/50a4da6b-cfdc-4c02-82a6-786c04ea0030",
+    "imagen": "credenciales/img/credly-50a4da6b-cfdc-4c02-82a6-786c04ea0030.png"
+  },
+  {
+    "id": "credly-1f20843d-5bda-4617-a3ce-7c17232e2024",
+    "fuente": "credly",
+    "titulo": "LFD102: A Beginner's Guide to Open Source Software Development",
+    "emisor": "The Linux Foundation",
+    "fecha": "2023-11-07",
+    "url": "https://www.credly.com/badges/1f20843d-5bda-4617-a3ce-7c17232e2024",
+    "imagen": "credenciales/img/credly-1f20843d-5bda-4617-a3ce-7c17232e2024.png"
+  },
+  {
+    "id": "credly-b5c75baf-b128-4af7-b62e-796bbf08c65b",
+    "fuente": "credly",
+    "titulo": "LFC102: Inclusive Open Source Community Orientation",
+    "emisor": "The Linux Foundation",
+    "fecha": "2023-08-04",
+    "url": "https://www.credly.com/badges/b5c75baf-b128-4af7-b62e-796bbf08c65b",
+    "imagen": "credenciales/img/credly-b5c75baf-b128-4af7-b62e-796bbf08c65b.png"
+  },
+  {
+    "id": "credly-060a7b1a-6c8a-410d-b88f-3c474575d38d",
+    "fuente": "credly",
+    "titulo": "Lifelong Learning",
+    "emisor": "CertiProf",
+    "fecha": "2023-05-19",
+    "url": "https://www.credly.com/badges/060a7b1a-6c8a-410d-b88f-3c474575d38d",
+    "imagen": "credenciales/img/credly-060a7b1a-6c8a-410d-b88f-3c474575d38d.png"
+  },
+  {
+    "id": "skillsboost-3416847",
+    "fuente": "skillsboost",
+    "titulo": "Google Cloud Computing Foundations: Data, ML, and AI in Google Cloud",
+    "emisor": "Google Cloud",
+    "fecha": "2023-04-05",
+    "url": "https://www.skills.google/public_profiles/dc58096a-bed4-4b02-80c2-8172ed18185e/badges/3416847",
+    "imagen": "credenciales/img/skillsboost-3416847.png"
+  },
+  {
+    "id": "skillsboost-3416936",
+    "fuente": "skillsboost",
+    "titulo": "Google Cloud Essentials",
+    "emisor": "Google Cloud",
+    "fecha": "2023-04-05",
+    "url": "https://www.skills.google/public_profiles/dc58096a-bed4-4b02-80c2-8172ed18185e/badges/3416936",
+    "imagen": "credenciales/img/skillsboost-3416936.png"
+  },
+  {
+    "id": "skillsboost-3407045",
+    "fuente": "skillsboost",
+    "titulo": "Google Cloud Computing Foundations: Networking & Security in Google Cloud",
+    "emisor": "Google Cloud",
+    "fecha": "2023-04-04",
+    "url": "https://www.skills.google/public_profiles/dc58096a-bed4-4b02-80c2-8172ed18185e/badges/3407045",
+    "imagen": "credenciales/img/skillsboost-3407045.png"
+  },
+  {
+    "id": "skillsboost-3396947",
+    "fuente": "skillsboost",
+    "titulo": "Google Cloud Computing Foundations: Infrastructure in Google Cloud",
+    "emisor": "Google Cloud",
+    "fecha": "2023-04-02",
+    "url": "https://www.skills.google/public_profiles/dc58096a-bed4-4b02-80c2-8172ed18185e/badges/3396947",
+    "imagen": "credenciales/img/skillsboost-3396947.png"
+  },
+  {
+    "id": "skillsboost-3374136",
+    "fuente": "skillsboost",
+    "titulo": "Google Cloud Computing Foundations: Cloud Computing Fundamentals",
+    "emisor": "Google Cloud",
+    "fecha": "2023-03-28",
+    "url": "https://www.skills.google/public_profiles/dc58096a-bed4-4b02-80c2-8172ed18185e/badges/3374136",
+    "imagen": "credenciales/img/skillsboost-3374136.png"
+  },
+  {
+    "id": "credly-2a1c1f09-d9dc-4e79-90c6-d5d1d84bb792",
+    "fuente": "credly",
+    "titulo": "Explore Emerging Tech",
+    "emisor": "IBM SkillsBuild",
+    "fecha": "2022-12-23",
+    "url": "https://www.credly.com/badges/2a1c1f09-d9dc-4e79-90c6-d5d1d84bb792",
+    "imagen": "credenciales/img/credly-2a1c1f09-d9dc-4e79-90c6-d5d1d84bb792.png"
+  },
+  {
+    "id": "skillsboost-1733704",
+    "fuente": "skillsboost",
+    "titulo": "Build a Website on Google Cloud",
+    "emisor": "Google Cloud",
+    "fecha": "2022-02-22",
+    "url": "https://www.skills.google/public_profiles/dc58096a-bed4-4b02-80c2-8172ed18185e/badges/1733704",
+    "imagen": "credenciales/img/skillsboost-1733704.png"
+  }
+]

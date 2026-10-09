@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import * as cvEs from "../app/data/cv.mjs";
 import * as cvEn from "../app/data/cv.en.mjs";
+import { listarCredencialesPDF, agruparPorEmisor, titulosCompactos } from "../app/lib/credenciales.mjs";
 
 const idiomas = [
   { cv: cvEs, salida: "resume.tex", fuente: "app/data/cv.mjs" },
@@ -98,20 +99,22 @@ function buildHabilidades({ habilidades, ui }) {
   ].join("\n");
 }
 
-function buildCertificaciones({ certificaciones, ui }) {
-  // Si hay "detalle", el emisor va en la columna derecha (#3); si no, el emisor
-  // va inline junto al título (#2) para no dejar una columna derecha vacía.
-  const entries = certificaciones.map((c) => {
-    const [segundo, tercero] = c.detalle ? [c.detalle, c.emisor] : [c.emisor, ""];
-    return `  \\cvhonor{${escapeLatex(c.titulo)}}{${escapeLatex(segundo)}}{${escapeLatex(tercero)}}{}`;
-  });
+function buildCredenciales({ ui }) {
+  // Una fila por emisor (formato de Habilidades): "Google Cloud | Essentials; Computing Foundations…".
+  // Sale de la misma lista que el sitio: Credly + Skills Boost + PDF manuales (app/lib/credenciales.mjs).
+  // En el PDF van sin las de ocultarEnPDF y con títulos compactos; el sitio las muestra todas.
+  const grupos = agruparPorEmisor(listarCredencialesPDF(ui.lang));
+  const entries = grupos.map(
+    ({ emisor, items }) =>
+      `  \\cvskill{${escapeLatex(emisor)}}{${escapeLatex(titulosCompactos(items, emisor).join("; "))}}`
+  );
 
   return [
-    "%----------- CERTIFICACIONES -----------",
-    `\\cvsection{${escapeLatex(ui.pdf.certificaciones)}}`,
-    "\\begin{cvhonors}",
+    "%----------- FORMACIÓN Y CREDENCIALES -----------",
+    `\\cvsection{${escapeLatex(ui.pdf.credenciales)}}`,
+    "\\begin{cvcredenciales}",
     entries.join("\n"),
-    "\\end{cvhonors}",
+    "\\end{cvcredenciales}",
   ].join("\n");
 }
 
@@ -160,7 +163,7 @@ function buildBody(cv) {
     buildEducacion(cv),
     buildHabilidades(cv),
     "",
-    buildCertificaciones(cv),
+    buildCredenciales(cv),
     "",
     buildPortafolio(cv),
   ].join("\n");

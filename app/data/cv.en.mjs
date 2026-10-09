@@ -13,6 +13,7 @@ export const ui = {
     inicio: "Home",
     experiencia: "Experience",
     habilidades: "Skills",
+    credenciales: "Credentials",
     portafolio: "Portfolio",
     contacto: "Contact",
     abrirMenu: "Open menu",
@@ -27,8 +28,13 @@ export const ui = {
   secciones: {
     experiencia: "Experience",
     habilidades: "Technical skills",
-    certificaciones: "Certifications",
     educacion: "Education",
+    credenciales: "Training & Credentials",
+    credencialesIntro:
+      "Badges and course certificates. Each badge links to its verification page on the platform that issued it.",
+    todos: "All",
+    verificar: "Verify",
+    verCertificado: "View certificate",
     portafolio: "Portfolio",
     portafolioIntro: "Case studies from real projects, described without confidential client data.",
     contacto: "Contact",
@@ -40,7 +46,7 @@ export const ui = {
     experiencia: "Experience",
     educacion: "Education",
     habilidades: "Technical Skills",
-    certificaciones: "Certifications",
+    credenciales: "Training & Credentials",
     portafolio: "Portfolio",
     repositorio: "Repository",
   },
@@ -62,7 +68,7 @@ export const perfil = {
     "DevSecOps Specialist focused on Azure DevOps, CI/CD pipeline automation and organization-wide standardization of security controls. I designed a custom system of extensions and pipeline decorators that automatically injects DevSecOps controls into hundreds of pipelines and dozens of repositories, and I owned the adoption of Bancolombia's DevSecOps tooling at Banco Agrícola (Grupo Cibest, El Salvador), including direct contributions to the open source Engine Tools project.",
   // Longer version used in the PDF (the site hero uses the short version above).
   perfilCV:
-    "DevSecOps Specialist focused on Azure DevOps, CI/CD pipeline automation and organization-wide standardization of security controls. I designed a custom system of extensions and pipeline decorators that automatically injects DevSecOps controls into hundreds of pipelines and dozens of repositories, and I owned the adoption of Bancolombia's DevSecOps tooling at Banco Agrícola (Grupo Cibest, El Salvador), including direct contributions to the open source Engine Tools project. Systems Engineer (Universidad de Antioquia) with a background in web development (Java, Angular). Hands-on experience integrating SAST, SCA, secrets detection and IaC scanning (SonarQube, JFrog Xray, Trivy, Gitleaks, TruffleHog, Checkov). Google Cloud certified (including Kubernetes fundamentals). Committed to security by design (shift-left), automation with Python, PowerShell and Bash, and agile collaboration (Scrum).",
+    "DevSecOps Specialist focused on Azure DevOps, CI/CD pipeline automation and organization-wide standardization of security controls. I designed a custom system of extensions and pipeline decorators that automatically injects DevSecOps controls into hundreds of pipelines and dozens of repositories, and I owned the adoption of Bancolombia's DevSecOps tooling at Banco Agrícola (Grupo Cibest, El Salvador), including direct contributions to the open source Engine Tools project. Systems Engineer (Universidad de Antioquia) with a background in web development (Java, Angular). Hands-on experience integrating SAST, SCA, secrets detection and IaC scanning (SonarQube, JFrog Xray, Trivy, Gitleaks, TruffleHog, Checkov). Credentials from Google Cloud Skills Boost (including Kubernetes Engine labs), AWS Skill Builder and The Linux Foundation (GitOps). Committed to security by design (shift-left), automation with Python, PowerShell and Bash, and agile collaboration (Scrum).",
 };
 
 export const experiencia = [
@@ -169,17 +175,6 @@ export const habilidades = [
   { categoria: "Development", items: ["Java", "Spring Boot", "Python", "TypeScript", "Angular", "React"] },
   { categoria: "Databases", items: ["SQL", "NoSQL"] },
   { categoria: "Agile", items: ["Scrum", "Kanban"] },
-];
-
-export const certificaciones = [
-  {
-    titulo: "Google Cloud Platform",
-    detalle: "Fundamentals, Infrastructure, Networking, Data/ML/AI, Kubernetes",
-    emisor: "Google",
-  },
-  { titulo: "Build a Website on GCP", emisor: "Google" },
-  { titulo: "Lifelong Learning", emisor: "CertiProf" },
-  { titulo: "Explore Emerging Tech", emisor: "IBM SkillsBuild" },
 ];
 
 export const proyectos = [

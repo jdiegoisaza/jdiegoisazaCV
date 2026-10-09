@@ -35,6 +35,20 @@
   \vspace{1.0mm}
 }
 
+% Como cvskills, pero con la columna de texto más angosta: las etiquetas de emisor
+% ("The Linux Foundation") son más largas que las de Habilidades y desbordaban el margen.
+\newenvironment{cvcredenciales}{%
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2.0mm}
+  \begin{center}
+    \setlength\tabcolsep{1ex}
+    \setlength{\extrarowheight}{0pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.76}}}
+}{%
+    \end{tabular*}
+  \end{center}
+}
+
 %%HEADER%%
 
 \begin{document}

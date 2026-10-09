@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ThemeToggle from "@/app/components/ThemeToggle";
 
 // Los ids de sección son los mismos en ambos idiomas; solo cambia la etiqueta (ui.nav).
-const sectionIds = ["inicio", "experiencia", "habilidades", "portafolio", "contacto"];
+const sectionIds = ["inicio", "experiencia", "habilidades", "credenciales", "portafolio", "contacto"];
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default function Nav({ ui }) {
@@ -51,7 +51,7 @@ export default function Nav({ ui }) {
           Juan Diego Isaza
         </a>
 
-        <div className="flex items-center gap-2 sm:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <LangLink href={otroIdiomaHref} ui={ui} />
           <ThemeToggle isDark={isDark} onToggle={toggleTheme} ui={ui} />
           <button
@@ -64,7 +64,7 @@ export default function Nav({ ui }) {
           </button>
         </div>
 
-        <div className="hidden sm:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-6">
           <ul className="flex gap-6 text-sm">
             {links.map((link) => {
               const isActive = active === link.href.slice(1);
@@ -97,7 +97,7 @@ export default function Nav({ ui }) {
       </nav>
 
       {open && (
-        <ul className="sm:hidden flex flex-col gap-1 px-6 pb-4 text-sm text-neutral-600 dark:text-neutral-400">
+        <ul className="lg:hidden flex flex-col gap-1 px-6 pb-4 text-sm text-neutral-600 dark:text-neutral-400">
           {links.map((link) => (
             <li key={link.href}>
               <a

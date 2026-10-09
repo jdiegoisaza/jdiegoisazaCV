@@ -1,8 +1,8 @@
-import { Wrench, Award, GraduationCap } from "lucide-react";
+import { Wrench, GraduationCap } from "lucide-react";
 import Reveal from "@/app/components/Reveal";
 
 export default function Skills({ cv }) {
-  const { habilidades, certificaciones, educacion, ui } = cv;
+  const { habilidades, educacion, ui } = cv;
   return (
     <section id="habilidades" className="max-w-5xl mx-auto px-6 py-20">
       <Reveal>
@@ -37,46 +37,24 @@ export default function Skills({ cv }) {
       </div>
 
       <Reveal>
-        <div className="grid sm:grid-cols-2 gap-10">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Award className="w-4 h-4 text-blue-600 dark:text-blue-400" strokeWidth={2} />
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                {ui.secciones.certificaciones}
-              </h3>
-            </div>
-            <ul className="space-y-2">
-              {certificaciones.map((cert) => (
-                <li key={cert.titulo} className="text-sm text-neutral-700 dark:text-neutral-300">
-                  <span className="font-medium text-neutral-900 dark:text-neutral-100">
-                    {cert.titulo}
-                  </span>
-                  {cert.detalle ? `, ${cert.detalle}` : ""} —{" "}
-                  <span className="text-blue-600 dark:text-blue-400">{cert.emisor}</span>
-                </li>
-              ))}
-            </ul>
+        <div>
+          <div className="flex items-center gap-2 mb-4">
+            <GraduationCap className="w-4 h-4 text-blue-600 dark:text-blue-400" strokeWidth={2} />
+            <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+              {ui.secciones.educacion}
+            </h3>
           </div>
-
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <GraduationCap className="w-4 h-4 text-blue-600 dark:text-blue-400" strokeWidth={2} />
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                {ui.secciones.educacion}
-              </h3>
-            </div>
-            <ul className="space-y-2">
-              {educacion.map((edu) => (
-                <li key={edu.titulo} className="text-sm text-neutral-700 dark:text-neutral-300">
-                  <span className="font-medium text-neutral-900 dark:text-neutral-100">
-                    {edu.titulo}
-                  </span>{" "}
-                  — {edu.institucion} ({edu.periodo}
-                  {edu.detalle ? `, ${edu.detalle}` : ""})
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className="space-y-2">
+            {educacion.map((edu) => (
+              <li key={edu.titulo} className="text-sm text-neutral-700 dark:text-neutral-300">
+                <span className="font-medium text-neutral-900 dark:text-neutral-100">
+                  {edu.titulo}
+                </span>{" "}
+                — {edu.institucion} ({edu.periodo}
+                {edu.detalle ? `, ${edu.detalle}` : ""})
+              </li>
+            ))}
+          </ul>
         </div>
       </Reveal>
     </section>

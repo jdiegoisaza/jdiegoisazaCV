@@ -2,6 +2,7 @@ import Nav from "@/app/components/Nav";
 import Hero from "@/app/components/Hero";
 import Experience from "@/app/components/Experience";
 import Skills from "@/app/components/Skills";
+import Credentials from "@/app/components/Credentials";
 import Portfolio from "@/app/components/Portfolio";
 import Contact from "@/app/components/Contact";
 import Footer from "@/app/components/Footer";
@@ -17,6 +18,7 @@ export default function CvPage({ cv }) {
         <Hero cv={cv} />
         <Experience cv={cv} />
         <Skills cv={cv} />
+        <Credentials cv={cv} />
         <Portfolio cv={cv} />
         <Contact cv={cv} />
       </main>
