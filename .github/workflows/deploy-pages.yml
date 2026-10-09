@@ -35,8 +35,12 @@ jobs:
       - name: npm ci
         run: npm ci
 
+      # Solo hace falta para PDF nuevos sin miniatura comiteada; si falla, el build sigue.
       - name: Instalar poppler (miniaturas de certificados PDF)
-        run: sudo apt-get install -y --no-install-recommends poppler-utils
+        continue-on-error: true
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends poppler-utils
 
       - name: Actualizar credenciales (Credly + Google Skills Boost)
         run: node scripts/fetch-credenciales.mjs
