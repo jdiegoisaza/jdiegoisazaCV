@@ -173,7 +173,7 @@ export const habilidades = [
   { categoria: "Scripting", items: ["Python", "PowerShell", "Bash"] },
   { categoria: "Observability", items: ["Prometheus", "Grafana"] },
   { categoria: "Development", items: ["Java", "Spring Boot", "Python", "TypeScript", "Angular", "React"] },
-  { categoria: "Databases", items: ["SQL", "NoSQL"] },
+  { categoria: "Databases", items: ["SQL (PostgreSQL, MySQL)", "NoSQL (MongoDB)"] },
   { categoria: "Agile", items: ["Scrum", "Kanban"] },
 ];
 
