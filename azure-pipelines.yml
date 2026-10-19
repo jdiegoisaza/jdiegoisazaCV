@@ -42,7 +42,7 @@ stages:
           - script: |
               curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v$(GITLEAKS_VERSION)/gitleaks_$(GITLEAKS_VERSION)_linux_x64.tar.gz" -o gitleaks.tar.gz
               tar -xzf gitleaks.tar.gz gitleaks
-              ./gitleaks detect --source . --redact --exit-code 1
+              ./gitleaks detect --source . --redact --verbose --exit-code 1
             displayName: "Gitleaks - detección de secretos"
 
           - script: npm audit --audit-level=critical

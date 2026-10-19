@@ -1,0 +1,16 @@
+# Configuración de Gitleaks del repositorio (la toma automáticamente `gitleaks detect --source .`).
+# Se usan TODAS las reglas por defecto; solo se agrega una excepción acotada.
+title = "Gitleaks - pagina-web"
+
+[extend]
+useDefault = true
+
+# Las guías de estudio (guias/datos/*.mjs) son texto con comandos y nombres de ejemplo ficticios
+# ("AuthorizationFailed", "disk-vm-pagos-01"...). La regla genérica generic-api-key los confunde con
+# secretos porque aparecen junto a palabras como "auth" o "Key Vault".
+# La excepción aplica SOLO a esa regla y SOLO a esa carpeta: las reglas específicas (llaves de AWS,
+# tokens de GitHub, llaves privadas, etc.) siguen revisando también estos archivos.
+[[allowlists]]
+description = "Guías de estudio: ejemplos ficticios (falsos positivos de generic-api-key)"
+targetRules = ["generic-api-key"]
+paths = ['''^guias/datos/[^/]+\.mjs$''']
