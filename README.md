@@ -76,6 +76,15 @@ node scripts/fetch-credenciales.mjs
 
 Si Credly o Skills Boost fallan, el script conserva lo que ya había en el JSON y el build continúa.
 
+## Guías de estudio (`/guias/`)
+
+Guías interactivas de Azure, AWS, Git, Linux, Docker y Kubernetes: conceptos, comandos, situaciones comunes con su solución y flags, cada uno con explicación sencilla y detallada.
+
+- Contenido: `guias/datos/<tema>.mjs` · estilos: `guias/estilos.css` · lógica del navegador: `guias/app.js`.
+- `guias/build.mjs` genera un HTML autocontenido por tema más un `index.html` en `public/guias/` (no se comitea).
+- Se regeneran solas antes de `npm run dev` y `npm run build` (scripts `predev` / `prebuild`), así que los pipelines las publican sin pasos extra. Para regenerarlas a mano: `npm run guias`.
+- El generador valida que cada botón tenga su explicación; si falta una, el build falla.
+
 ## Infraestructura y despliegue
 
 - **Hosting**: Azure Static Web Apps (`infra/` tiene la definición en Terraform).

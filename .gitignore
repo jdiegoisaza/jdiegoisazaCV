@@ -50,3 +50,6 @@ cv/*.log
 cv/*.out
 cv/resume.pdf
 cv/resume_en.pdf
+
+# Guías de estudio: se generan desde guias/ antes de dev y build (no se comitean)
+/public/guias/

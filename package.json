@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node guias/build.mjs",
     "dev": "next dev",
+    "prebuild": "node guias/build.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "guias": "node guias/build.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.25.0",
