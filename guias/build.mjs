@@ -116,7 +116,30 @@ function renderHero(h) {
   throw new Error(`Tipo de mapa desconocido: ${h.tipo}`);
 }
 
+// Árbol de archivos: un objeto { carpeta, hijos } es una carpeta; un arreglo [clave, nombre, inicial?] es un archivo.
+function renderArbol(nodos, nivel = 0) {
+  return nodos
+    .map((n) =>
+      Array.isArray(n)
+        ? `<button type="button" class="archivo" data-k="${n[0]}"${n[2] ? " data-inicial" : ""} style="--n:${nivel}">${esc(n[1])}</button>`
+        : `<div class="carpeta" style="--n:${nivel}">${esc(n.carpeta)}/</div>${renderArbol(n.hijos, nivel + 1)}`
+    )
+    .join("");
+}
+
+// Sección de arquitectura: explorador de archivos + visor de código + diagrama de recursos (HTML del dato).
+function renderArquitectura(s) {
+  return `<section class="seccion arq"><h2>${esc(s.titulo)}</h2>${s.intro ? `<p class="sintro">${esc(s.intro)}</p>` : ""}
+<div class="explorador">
+<nav class="arbol" aria-label="Archivos del proyecto">${renderArbol(s.arbol)}</nav>
+<div class="visor" id="visor" aria-live="polite"><div class="visor-ruta" id="visor-ruta"></div><div id="visor-texto"></div><pre class="codigo" id="visor-codigo"></pre></div>
+</div>
+${s.infra ? `<h3 class="arq-sub">${esc(s.infraTitulo || "Infraestructura que crea")}</h3>${s.infra}` : ""}
+</section>`;
+}
+
 function renderSeccion(s) {
+  if (s.tipo === "arquitectura") return renderArquitectura(s);
   const grupos = s.grupos
     .map(
       (g) =>
@@ -139,6 +162,14 @@ function validar(g, html) {
   for (const [k, d] of Object.entries(g.datos)) {
     if (!Array.isArray(d) || d.length < 4 || d.length > 5) throw new Error(`${g.id}.${k}: formato inválido`);
   }
+  // Recursos del diagrama (i_): deben apuntar a un archivo (a_) existente y a un bloque que exista en su código.
+  for (const [k, d] of Object.entries(g.datos)) {
+    if (!k.startsWith("i_")) continue;
+    const [archivo, marcador] = String(d[3]).split("::");
+    const a = g.datos[archivo];
+    if (!a || !Array.isArray(a[3])) throw new Error(`${g.id}.${k}: el archivo ${archivo} no existe`);
+    if (!a[3].some((l) => l.includes(marcador))) throw new Error(`${g.id}.${k}: no se encontró '${marcador}' en ${a[0]}`);
+  }
   const sobran = Object.keys(g.datos).filter((k) => !usadas.has(k));
   if (sobran.length) console.warn(`  ! ${g.id}: datos sin usar: ${sobran.join(", ")}`);
 }
@@ -147,7 +178,11 @@ function conteos(g) {
   const partes = [];
   if (g.heroResumen) partes.push(`${g.heroResumen}: ${clavesDe(renderHero(g.hero)).size}`);
   for (const s of g.secciones) {
-    partes.push(`${s.corto}: ${new Set(s.grupos.flatMap((gr) => gr.items.map((i) => i[0]))).size}`);
+    const n =
+      s.tipo === "arquitectura"
+        ? clavesDe(renderArquitectura(s)).size
+        : new Set(s.grupos.flatMap((gr) => gr.items.map((i) => i[0]))).size;
+    partes.push(`${s.corto}: ${n}`);
   }
   return partes.join(" · ");
 }

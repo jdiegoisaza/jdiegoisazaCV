@@ -1,5 +1,7 @@
 // Guía de Terraform. Formato de cada dato: [título, explicación sencilla, explicación detallada, ejemplos, cuidado?]
-// Prefijos de clave: c_ comando · s_ situación · f_ flag · sin prefijo: concepto.
+// Prefijos de clave: c_ comando · s_ situación · f_ flag · a_/i_ arquitectura · sin prefijo: concepto.
+import { seccionArquitectura, datosArquitectura } from "./terraform-arquitectura.mjs";
+
 const guia = {
   id: "terraform",
   nombre: "Terraform",
@@ -27,6 +29,7 @@ const guia = {
     ],
   },
   secciones: [
+    seccionArquitectura,
     {
       titulo: "Conceptos",
       corto: "Conceptos",
@@ -74,6 +77,7 @@ const guia = {
     },
   ],
   datos: {
+    ...datosArquitectura,
     iac: ["Infrastructure as Code (IaC)", "Describir la infraestructura en archivos de código en lugar de crearla a mano en el portal.", "La infraestructura (redes, VMs, bases de datos, permisos) se define en archivos versionados en Git. Ventajas: es repetible (el mismo código crea el mismo ambiente en dev, QA y prod), revisable (los cambios pasan por pull request), auditable (el historial dice quién cambió qué) y recuperable (si algo se borra, se vuelve a crear). Herramientas: Terraform y OpenTofu (multi-nube), Bicep/ARM (Azure), CloudFormation (AWS), Pulumi.", ["# En lugar de 20 clics en el portal:", "resource \"azurerm_resource_group\" \"main\" {", "  name     = \"rg-pagos-prod-brs-001\"", "  location = \"brazilsouth\"", "}"]],
     terraform: ["Terraform", "Herramienta de IaC declarativa y multi-nube de HashiCorp.", "Es declarativo: describes el resultado final ('quiero esta VNet con estas subredes') y Terraform calcula los pasos para llegar ahí. Funciona con cualquier plataforma que tenga provider (Azure, AWS, GCP, Kubernetes, GitHub, Datadog…). Su ciclo es escribir → init → plan → apply, y guarda en el state lo que creó para saber qué cambiar la próxima vez. Es idempotente: aplicar dos veces el mismo código no crea nada duplicado.", ["terraform -version", "terraform init && terraform plan"]],
     hcl: ["HCL y archivos .tf", "El lenguaje de Terraform y cómo se organizan los archivos.", "HCL (HashiCorp Configuration Language) usa bloques con etiquetas y argumentos. Terraform lee todos los archivos .tf de la carpeta como un solo conjunto (el nombre del archivo no importa), pero por convención se separan: main.tf (recursos), variables.tf (entradas), outputs.tf (salidas), versions.tf o providers.tf (versiones y providers) y terraform.tfvars (valores). Las referencias entre recursos usan tipo.nombre.atributo, y así Terraform sabe el orden en que debe crearlos.", ["resource \"azurerm_storage_account\" \"st\" {", "  name                     = \"stpagosprodbrs001\"", "  resource_group_name      = azurerm_resource_group.main.name   # referencia", "  location                 = azurerm_resource_group.main.location", "  account_tier             = \"Standard\"", "  account_replication_type = \"ZRS\"", "}"]],
